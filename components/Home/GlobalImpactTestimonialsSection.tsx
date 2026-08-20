@@ -5,7 +5,7 @@ import { Star, Globe, Building2, MessageCircle, Quote, ArrowRight, ChevronLeft, 
 import { useState } from "react";
 
 const stats = [
-  { label: "Active Businesses", value: "16,000+", icon: Building2, desc: "Scaling operations globally", badge: "Verified" },
+  { label: "Active Businesses", value: "1000+", icon: Building2, desc: "Scaling operations globally", badge: "Verified" },
   { label: "Countries Reached", value: "190+", icon: Globe, desc: "Worldwide enterprise trust", badge: "Global" },
   { label: "Messages Processed", value: "50M+", icon: MessageCircle, desc: "Daily conversational volume", badge: "High Speed" },
   { label: "Customer Satisfaction", value: "4.9/5", icon: Star, desc: "Rated on top directories", badge: "Top Rated" },
