@@ -1,0 +1,114 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
+
+export default function GrowBetterSection() {
+  return (
+    <section className="py-28 sm:py-36 bg-[#FDFDFD] text-[#1d1d1d] relative overflow-hidden border-t border-gray-100">
+      
+      {/* Background Glow Accents */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[800px] h-[450px] bg-[#fef3c7]/60 rounded-full blur-[150px] pointer-events-none -z-10" />
+
+      <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
+        
+        {/* Top Badge */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-2 bg-[#FDFDFD] border px-4 py-1.5 rounded-full text-xs font-black text-[#92400e] tracking-wider uppercase shadow-sm mb-8 cursor-default"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-[#d97706]" />
+          <span>Scale Your Business Faster</span>
+        </motion.div>
+
+        {/* Main Heading with Smooth Wavy Underline Effect */}
+        <motion.div 
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="space-y-6 mb-10"
+        >
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.15] text-[#1d1d1d]">
+            Grow better with <br className="hidden sm:block" />
+            <span className="relative inline-block pb-3 px-1">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00a859] via-emerald-600 to-[#166534]">
+                Replyly today
+              </span>
+              
+              {/* Smooth & Rounded Wavy SVG Underline */}
+              <svg 
+                className="absolute left-0 -bottom-1.5 w-full h-4 text-[#00a859]" 
+                viewBox="0 0 200 12" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="none"
+              >
+                <motion.path 
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  whileInView={{ pathLength: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
+                  d="M1 8C32 2 64 14 100 8C136 2 168 14 199 8" 
+                  stroke="currentColor" 
+                  strokeWidth="4" 
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
+          </h2>
+
+          <p className="text-gray-600 text-base sm:text-xl font-normal max-w-2xl mx-auto leading-relaxed pt-2">
+            Join thousands of fast-growing brands leveraging WhatsApp automation to boost sales, streamline support, and delight customers.
+          </p>
+        </motion.div>
+
+        {/* Feature Checkpoints */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 mb-12 text-xs sm:text-sm font-bold text-gray-700"
+        >
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#00a859]" />
+            <span>No credit card required</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#00a859]" />
+            <span>7-day free trial</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#00a859]" />
+            <span>Setup in 5 minutes</span>
+          </div>
+        </motion.div>
+
+        {/* Premium CTA Button */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex flex-col sm:flex-row items-center justify-center"
+        >
+          <button className="relative group overflow-hidden rounded-full p-[2px] cursor-pointer shadow-2xl active:scale-95 transition-transform duration-200 w-full sm:w-auto">
+            {/* Animated Gradient Border Layer */}
+            <span className="absolute inset-0 bg-gradient-to-r from-[#00a859] via-emerald-400 to-[#166534] rounded-full animate-pulse" />
+            
+            {/* Button Inner Content */}
+            <span className="relative px-8 sm:px-10 py-4 sm:py-4.5 bg-[#1d1d1d] rounded-full flex items-center justify-center gap-3 text-white font-extrabold text-base transition-all duration-300 group-hover:bg-opacity-90">
+              <span>Get Started Free</span>
+              <ArrowRight className="w-5 h-5 text-[#00e785] group-hover:translate-x-1.5 transition-transform" />
+            </span>
+          </button>
+        </motion.div>
+
+      </div>
+    </section>
+  );
+}
