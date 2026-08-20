@@ -67,7 +67,7 @@ export default function AiShowcaseSection() {
         >
           <div className="inline-flex items-center gap-2 bg-[#f0fdf4] border border-[#bbf7d0] px-4 py-1.5 rounded-full text-xs font-black text-[#166534] shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-[#00a859]" />
-            <span>AI @ WATI INTELLIGENCE</span>
+            <span>AI @ Replyly INTELLIGENCE</span>
           </div>
 
           <h2 className="text-4xl sm:text-6xl font-black text-[#1d1d1d] tracking-tight leading-tight">
