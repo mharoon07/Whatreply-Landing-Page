@@ -73,7 +73,7 @@ export default function AiShowcaseSection() {
           <h2 className="text-4xl sm:text-6xl font-black text-[#1d1d1d] tracking-tight leading-tight">
             10X your performance <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00a859] via-emerald-600 to-[#166534]">
-              with Wati AI
+              with Replyly AI
             </span>
           </h2>
 
