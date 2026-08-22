@@ -2,45 +2,34 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { Sparkles, Bot, ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
+import { Bot, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
-// Tab content data structure for cleaner separation and maintainability
 const TAB_CONTENT = {
   support: {
-    badge: "⚡ Support Agent Preview",
-    title: "Train your AI support agent in minutes",
-    description: (
-      <>
-        Let your automated chatbot deflect up to{" "}
-        <span className="font-bold text-[#1d1d1d]">60% of customer queries</span>{" "}
-        instantly on WhatsApp, reducing ticket resolution time to absolute zero.
-      </>
-    ),
+    badge: "⚡ 24/7 Support Agent",
+    title: "Train Human-Like AI Support in Minutes",
+    description: "Automate 85% of repetitive customer inquiries instantly with deep knowledge-base context and zero human intervention.",
     features: [
-      "Instant 24/7 automated query handling",
-      "Human-like contextual conversational flow",
-      "Seamless data sync with CRM & Knowledge base",
+      "Instant 0.8s response time on WhatsApp & Web",
+      "Multilingual AI with human-like empathy & context",
+      "Direct 1-click sync with Zendesk, HubSpot & Shopify",
     ],
-    image: "/ai-support.png",
-    logText: "Query resolved automatically. Deflection: +60%",
+    image: "/ai-support2.png",
+    cta: "Build Your AI Agent",
   },
   sales: {
-    badge: "🚀 Sales Pipeline Preview",
-    title: "Qualify & convert leads 24/7 on chat",
-    description: (
-      <>
-        Build smart intelligent agents that uncover buyer intent, score
-        prospects, and book high-ticket meetings automatically in real-time.
-      </>
-    ),
+    badge: "🚀 Sales Pipeline Intelligence",
+    title: "Qualify & Convert Leads 24/7 on Chat",
+    description: "Score buyer intent in real-time, handle objections smoothly, and book high-ticket meetings straight into your sales calendar.",
     features: [
-      "Automated lead scoring & instant qualification",
-      "Intelligent routing to human sales executives",
-      "Automated calendar appointment booking",
+      "Instant AI lead scoring & buyer qualification",
+      "Automated calendar booking & meeting reminders",
+      "Smart live routing to top sales executives",
     ],
-    image: "/inbound.png",
-    logText: "Lead tagged as 'High Intent Enterprise'. Assigned to rep.",
+    image: "/inbound2.png",
+    cta: "Build Your AI Agent",
   },
 } as const;
 
@@ -49,178 +38,118 @@ export default function AiShowcaseSection() {
   const content = TAB_CONTENT[activeTab];
 
   return (
-    <section className="py-28 bg-gradient-to-b from-white via-[#fcfcfc] to-white relative overflow-hidden border-t border-gray-100">
-      
-      {/* Dynamic Background Glows */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] bg-[#f0fdf4] rounded-full blur-[120px] -z-10 pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-72 h-72 bg-emerald-50 rounded-full blur-3xl -z-10 pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6">
+    <section 
+      aria-label="AI Agents Showcase Section"
+      className="py-14 sm:py-20 lg:py-16 bg-white relative overflow-hidden border-t border-slate-100"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         
-        {/* Section Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16 space-y-5"
-        >
-          <div className="inline-flex items-center gap-2 bg-[#f0fdf4] border border-[#bbf7d0] px-4 py-1.5 rounded-full text-xs font-black text-[#166534] shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-[#00a859]" />
-            <span>AI @ Replyly INTELLIGENCE</span>
-          </div>
-
-          <h2 className="text-4xl sm:text-6xl font-black text-[#1d1d1d] tracking-tight leading-tight">
-            10X your performance <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00a859] via-emerald-600 to-[#166534]">
-              with Replyly AI
-            </span>
-          </h2>
-
-          <p className="text-gray-600 text-lg font-normal">
-            Let Wati AI handle heavy lifting, enabling your teams to drive meaningful conversations that build relationships and revenue.
-          </p>
-
-          {/* Premium Animated Switcher Tabs */}
-          <div className="flex justify-center pt-6">
-            <div className="bg-gray-100/80 backdrop-blur-md p-2 rounded-full inline-flex gap-2 border border-gray-200/80 shadow-inner">
-              {(["support", "sales"] as const).map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`relative px-7 py-3 rounded-full text-sm font-extrabold transition-all duration-300 cursor-pointer ${
-                    activeTab === tab ? "text-[#1d1d1d]" : "text-gray-500 hover:text-[#1d1d1d]"
-                  }`}
-                >
-                  {activeTab === tab && (
-                    <motion.div 
-                      layoutId="activeTabBadge"
-                      className="absolute inset-0 bg-white rounded-full shadow-md border border-gray-200/60 -z-10"
-                      transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                    />
-                  )}
-                  {tab === "support" ? "AI Support Agent" : "Inbound Intelligence Agent"}
-                </button>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Main Interactive Showcase Card Grid */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="bg-white border border-gray-200/80 rounded-[2.5rem] p-8 sm:p-14 shadow-2xl shadow-gray-200/50 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative"
-        >
-          
-          {/* Left Content Area with Smooth Animation */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="w-14 h-14 rounded-2xl bg-[#f0fdf4] border border-[#bbf7d0] flex items-center justify-center text-[#00a859] shadow-sm">
-              <Bot className="w-7 h-7" />
-            </div>
-
-            <AnimatePresence mode="wait">
-              <motion.div 
-                key={activeTab}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-6"
+        {/* Animated Tab Switcher */}
+        <div className="flex justify-center mb-10 sm:mb-14">
+          <div className="bg-gray-100/90 backdrop-blur-md p-1.5 rounded-full inline-flex gap-2 border border-gray-200/80 shadow-inner">
+            {(["support", "sales"] as const).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`relative px-5 sm:px-8 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-extrabold transition-all duration-300 cursor-pointer ${
+                  activeTab === tab ? "text-[#1d1d1d]" : "text-gray-500 hover:text-[#1d1d1d]"
+                }`}
               >
+                {activeTab === tab && (
+                  <motion.div 
+                    layoutId="activeTabBadge"
+                    className="absolute inset-0 bg-white rounded-full shadow-md border border-gray-200/60 -z-10"
+                    transition={{ type: "spring", stiffness: 350, damping: 28 }}
+                  />
+                )}
+                {tab === "support" ? "AI Support Agent" : "Inbound Intelligence Agent"}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Dynamic Alternating Showcase Grid */}
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={activeTab}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
+          >
+            
+            {/* Text Card Column */}
+            <div className={`${
+              activeTab === "support" 
+                ? "lg:col-span-5 lg:order-1" 
+                : "lg:col-span-5 lg:order-2"
+            }`}>
+              <div className="bg-slate-50/90 border border-slate-200/80 rounded-3xl p-6 sm:p-8 lg:p-9 shadow-sm space-y-6">
+                
+                <div className="flex items-center justify-between">
+                  <div className="w-12 h-12 rounded-2xl bg-[#f0fdf4] border border-[#bbf7d0] flex items-center justify-center text-[#00a859] shadow-2xs">
+                    <Bot className="w-6 h-6" />
+                  </div>
+                  <span className="text-xs font-bold text-[#166534] bg-[#f0fdf4] border border-[#bbf7d0] px-3 py-1 rounded-full">
+                    {content.badge}
+                  </span>
+                </div>
+
                 <div className="space-y-3">
-                  <h3 className="text-3xl sm:text-4xl font-black text-[#1d1d1d] tracking-tight leading-tight">
+                  <h3 className="text-2xl sm:text-3xl font-black text-[#1d1d1d] tracking-tight leading-snug">
                     {content.title}
                   </h3>
-                  <p className="text-gray-600 text-base leading-relaxed font-normal">
+                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
                     {content.description}
                   </p>
                 </div>
 
-                <div className="space-y-3.5 pt-2">
+                <div className="space-y-3.5 pt-1 border-t border-slate-200/70">
                   {content.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-3.5 text-sm font-semibold text-gray-800">
-                      <div className="w-6 h-6 rounded-full bg-[#f0fdf4] flex items-center justify-center text-[#00a859]">
+                    <div key={idx} className="flex items-center gap-3 text-xs sm:text-sm font-semibold text-slate-800">
+                      <div className="w-5 h-5 rounded-full bg-[#f0fdf4] flex items-center justify-center text-[#00a859] shrink-0">
                         <CheckCircle2 className="w-4 h-4" />
                       </div>
                       <span>{feature}</span>
                     </div>
                   ))}
                 </div>
-              </motion.div>
-            </AnimatePresence>
 
-            <div className="pt-4">
-              <button className="bg-[#1d1d1d] text-white px-8 py-4 rounded-full font-extrabold hover:bg-[#00e785] hover:text-[#1d1d1d] transition-all duration-300 shadow-lg shadow-black/10 flex items-center gap-3 group cursor-pointer">
-                <span>Build Your AI Agent</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div>
-          </div>
+                {/* CTA Button */}
+                <div className="pt-2">
+                  <Link 
+                    href="/free-trial"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#1d1d1d] text-white px-8 py-4 rounded-full font-extrabold hover:bg-[#00e785] hover:text-[#1d1d1d] transition-all duration-300 shadow-lg shadow-black/10 group cursor-pointer"
+                  >
+                    <span>{content.cta}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
 
-          {/* Right Interactive Image Showcase Area */}
-          <div className="lg:col-span-7 bg-[#fafafa] p-6 sm:p-8 rounded-3xl border border-gray-200/80 shadow-inner space-y-6 relative overflow-hidden">
-            
-            {/* Window Header Controls */}
-            <div className="flex items-center justify-between pb-4 border-b border-gray-200/60">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-400/80" />
-                <div className="w-3 h-3 rounded-full bg-amber-400/80" />
-                <div className="w-3 h-3 rounded-full bg-emerald-400/80" />
               </div>
-              <span className="text-xs font-mono font-bold text-gray-500 bg-white px-3 py-1 rounded-full border border-gray-200">
-                {content.badge}
-              </span>
             </div>
 
-            {/* Image Preview Container */}
-            <AnimatePresence mode="wait">
-              <motion.div 
-                key={activeTab}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-4"
-              >
-                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-md bg-white border border-gray-200/80">
-                  <Image 
-                    src={content.image}
-                    alt={content.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 600px"
-                    className="object-cover object-center"
-                    priority
-                  />
-                </div>
-
-                {/* System Action Log */}
-                <div className="bg-white/80 p-3.5 rounded-xl border border-gray-200/60 flex items-center justify-between text-xs text-gray-500 shadow-sm">
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-[#00a859]" />
-                    <span className="font-mono font-semibold">
-                      {content.logText}
-                    </span>
-                  </div>
-                  <span className="text-emerald-600 font-bold font-mono">0.4s response</span>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Footer Status Bar */}
-            <div className="pt-2 border-t border-gray-200/60 flex items-center justify-between text-xs text-gray-500 font-semibold">
-              <span className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                Wati Conversational Core Active
-              </span>
-              <span className="text-[#00a859] font-bold">Official Meta Partner API</span>
+            {/* Responsive Image Showcase Column */}
+            <div className={`${
+              activeTab === "support" 
+                ? "lg:col-span-7 lg:order-2" 
+                : "lg:col-span-7 lg:order-1"
+            }`}>
+              <div className="relative w-full aspect-[16/10] ">
+                <Image 
+                  src={content.image}
+                  alt={content.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 720px"
+                  className="object-cover object-center"
+                  priority
+                />
+              </div>
             </div>
 
-          </div>
-
-        </motion.div>
+          </motion.div>
+        </AnimatePresence>
 
       </div>
     </section>

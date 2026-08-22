@@ -7,7 +7,7 @@ import { useState } from "react";
 const stats = [
   { label: "Active Businesses", value: "1000+", icon: Building2, desc: "Scaling operations globally", badge: "Verified" },
   { label: "Countries Reached", value: "100+", icon: Globe, desc: "Worldwide enterprise trust", badge: "Global" },
-  { label: "Messages Processed", value: "100k+", icon: MessageCircle, desc: "Daily conversational volume", badge: "High Speed" },
+  { label: "Messages Processed", value: "1M+", icon: MessageCircle, desc: "Daily conversational volume", badge: "High Speed" },
   { label: "Customer Satisfaction", value: "4.9/5", icon: Star, desc: "Rated on top directories", badge: "Top Rated" },
 ];
 
@@ -71,7 +71,7 @@ export default function GlobalImpactTestimonialsSection() {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white via-[#fafafa] to-white text-[#1d1d1d] relative overflow-hidden border-t border-gray-100">
+    <section className="py-12 bg-gradient-to-b from-white via-[#fafafa] to-white text-[#1d1d1d] relative overflow-hidden border-t border-gray-100">
       
       {/* Soft Background Emerald Glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#f0fdf4] rounded-full blur-[140px] pointer-events-none -z-10" />
@@ -93,14 +93,12 @@ export default function GlobalImpactTestimonialsSection() {
 
           <h2 className="text-4xl sm:text-6xl font-black tracking-tight leading-tight">
             Trusted by industry leaders <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00a859] via-emerald-600 to-[#166534]">
-              across 190+ countries.
+            <span className="relative inline-block pb-3 px-2 mx-1 mt-2 sm:mt-0 bg-[#00a859] text-white rounded-xl shadow-lg transform -rotate-1  ">
+              across 100+ countries.
             </span>
           </h2>
 
-          <p className="text-gray-600 text-lg font-normal">
-            See why fast-growing startups and global enterprises choose Wati to power their customer engagement.
-          </p>
+          
         </motion.div>
 
         {/* High-Impact Metrics Grid with Side Decorative Circles & Icons */}
@@ -224,37 +222,8 @@ export default function GlobalImpactTestimonialsSection() {
           </AnimatePresence>
         </div>
 
-        {/* Bottom Callout Banner */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-24 bg-gradient-to-r from-[#1d1d1d] via-[#2d2d2d] to-[#1d1d1d] rounded-[2.5rem] p-8 sm:p-14 text-white relative overflow-hidden shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8 border border-gray-800"
-        >
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#00a859]/15 rounded-full blur-[100px] pointer-events-none" />
-          
-          <div className="text-left space-y-3 relative z-10 max-w-xl">
-            <div className="inline-flex items-center gap-2 bg-[#00a859]/20 border border-[#00a859]/40 px-3.5 py-1 rounded-full text-xs font-bold text-[#00e785] cursor-default">
-              <ShieldCheck className="w-4 h-4" />
-              <span>Free 7-Day Trial • Instant WhatsApp API Setup</span>
-            </div>
-            <h3 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
-              Ready to scale your business conversations?
-            </h3>
-            <p className="text-gray-300 text-base font-normal">
-              Join thousands of brands closing deals faster on WhatsApp today.
-            </p>
-          </div>
-
-          <div className="relative z-10 shrink-0">
-            <button className="bg-[#00a859] text-white px-9 py-4 rounded-full font-extrabold hover:bg-[#00e785] hover:text-[#1d1d1d] transition-all duration-300 shadow-xl shadow-[#00a859]/20 flex items-center gap-3 group cursor-pointer active:scale-95">
-              <span>Get Started Free</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-        </motion.div>
-
+        
+       
       </div>
     </section>
   );

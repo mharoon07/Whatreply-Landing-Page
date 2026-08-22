@@ -53,9 +53,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo Image */}
         <Link href="/" className="flex items-center gap-2 focus:outline-none">
-          <div className="relative w-28 h-8 flex items-center">
+          <div className="relative w-48 h-16 flex items-center">
             <Image
-              src="/logo-navbar.png"
+              src="/logo-navbar3.png"
               alt="Wati Logo"
               fill
               priority
@@ -129,7 +129,7 @@ export default function Navbar() {
           </div>
 
           <Link
-            href="#pricing"
+            href="/pricing"
             className="hover:text-[#00e785] transition-colors"
           >
             Pricing

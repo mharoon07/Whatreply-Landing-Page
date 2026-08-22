@@ -2,115 +2,249 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Star, ShieldCheck } from "lucide-react";
+import { 
+  ArrowRight, 
+  Star, 
+  Sparkles, 
+  Play, 
+  Zap, 
+  Bot, 
+  CheckCircle2, 
+  TrendingUp 
+} from "lucide-react";
 import { motion } from "framer-motion";
+
+// In-Place Floating Wavy Underline Component
+function WavyUnderline() {
+  return (
+    <span className="relative inline-block px-1">
+      <span className="relative z-10 bg-[#00e785] bg-clip-text text-transparent">
+        Conversational AI
+      </span>
+      {/* Wave SVG: Draws once, then gently floats & ripples in place */}
+      <span className="absolute -bottom-2.5 sm:-bottom-3 left-0 right-0 w-full h-3 sm:h-4 overflow-visible pointer-events-none">
+        <motion.svg
+          viewBox="0 0 240 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-full text-[#00e785]"
+          preserveAspectRatio="none"
+          animate={{
+            y: [0, -2, 1.5, 0],
+            scaleY: [1, 1.12, 0.92, 1],
+          }}
+          transition={{
+            duration: 3.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <motion.path
+            d="M 2 9 Q 20 1, 40 9 T 80 9 T 120 9 T 160 9 T 200 9 T 238 9"
+            stroke="url(#wavyUnderlineGrad)"
+            strokeWidth="4"
+            strokeLinecap="round"
+            fill="none"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{
+              duration: 1.1,
+              delay: 0.3,
+              ease: "easeOut",
+            }}
+            className="filter drop-shadow-[0_2px_6px_rgba(0,231,133,0.5)]"
+          />
+          <defs>
+            <linearGradient id="wavyUnderlineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#00e785" />
+              <stop offset="50%" stopColor="#10b981" />
+              <stop offset="100%" stopColor="#00e785" />
+            </linearGradient>
+          </defs>
+        </motion.svg>
+      </span>
+    </span>
+  );
+}
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-white pt-24 pb-20 lg:pt-32 lg:pb-32">
-      
-      {/* Background Subtle Light Green Glow Elements */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#f0fdf4] rounded-full blur-3xl -z-10 pointer-events-none" />
-
-      <div className="max-w-5xl mx-auto px-6 text-center">
+    <section 
+      aria-label="Hero Section" 
+      className="relative overflow-hidden bg-white pt-28 pb-16 lg:pt-36 lg:pb-28"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
         
-        {/* Top Announcement Tag with Animation */}
+        {/* Top Announcement Tag with High-Energy Micro-Badge */}
         <motion.div 
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex justify-center mb-8"
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="inline-flex justify-center mb-6 sm:mb-8"
         >
-          <div className="inline-flex items-center gap-2 bg-[#f0fdf4] border border-[#bbf7d0] px-4 py-2 rounded-full text-sm font-semibold text-[#166534] shadow-sm hover:bg-[#dcfce7] transition cursor-pointer">
-            <span className="bg-[#00e785] text-[#1d1d1d] text-xs px-2.5 py-0.5 rounded-full font-extrabold">New</span>
-            <span>Get TikTok DMs and Ads in Wati Team Inbox</span>
-            <ArrowRight className="w-4 h-4" />
-          </div>
+          <Link
+            href="/free-trial"
+            className="group relative inline-flex items-center gap-2 sm:gap-3 bg-slate-50 hover:bg-white border border-slate-200/90 hover:border-emerald-400 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-800 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
+          >
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00e785] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00a859]"></span>
+            </span>
+            <span className="bg-[#00e785] text-slate-900 text-[11px] sm:text-xs px-2.5 py-0.5 rounded-full font-black uppercase tracking-wider shadow-xs">
+              NEW AI 2.0
+            </span>
+            <span className="text-slate-600 group-hover:text-slate-900 font-medium">
+              Transform WhatsApp Chats into 24/7 Revenue Engines
+            </span>
+            <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-1 transition-all" />
+          </Link>
         </motion.div>
 
-        {/* Main Heading & Subtext with Animation */}
+        {/* Main SEO & Conversion Power Heading */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.65, delay: 0.08, ease: "easeOut" }}
           className="space-y-6 max-w-4xl mx-auto"
         >
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight text-[#1d1d1d] leading-[1.08] ">
-            The <span className=" underline decoration-[#00e785] decoration-wavy decoration-6 underline-offset-8">#1 business</span> messaging platform
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1] sm:leading-[1.12]">
+            Turn Every Message Into Instant Revenue With{" "}
+            <WavyUnderline />
           </h1>
           
-          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-normal ">
-            From the first marketing touchpoint through the sales cycle to ongoing customer success, Wati drives faster ROI with an easy-to-use, scalable AI-powered customer engagement platform.
+          {/* Subtext: Clear, Persuasive, Captivating */}
+          <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal pt-2">
+            Stop losing qualified leads to slow replies. Whatreply empowers scaling brands to automate <strong className="font-semibold text-slate-900">85% of customer queries</strong>, broadcast targeted campaigns with <strong className="font-semibold text-emerald-700">98% open rates</strong>, and close deals 3x faster on WhatsApp & omnichannel.
           </p>
 
-          {/* Centered CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Link 
-              href="/demo" 
-              className="w-full sm:w-auto bg-[#1d1d1d] text-white px-8 py-4 rounded-full font-bold hover:bg-[#00e785] hover:text-[#1d1d1d] transition-all shadow-xl shadow-gray-200 flex items-center justify-center gap-2 cursor-pointer"
-            >
-              Book a Demo <ArrowRight className="w-5 h-5" />
-            </Link>
+          {/* Centered Action-Packed CTAs */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 pt-4 sm:pt-6">
             <Link 
               href="/free-trial" 
-              className="w-full sm:w-auto border-2 border-gray-200 text-[#1d1d1d] px-8 py-4 rounded-full font-bold hover:border-[#1d1d1d] hover:bg-[#f0fdf4]/50 transition-all flex items-center justify-center cursor-pointer"
+              className="group relative w-full sm:w-auto overflow-hidden bg-[#1d1d1d] hover:bg-emerald-600 text-white px-8 py-4 rounded-full font-bold text-base transition-all duration-300 shadow-xl shadow-slate-900/10 hover:shadow-emerald-500/25 hover:-translate-y-0.5 flex items-center justify-center gap-3 cursor-pointer"
             >
-              Try for Free
+              <Zap className="w-5 h-5 text-[#00e785] group-hover:text-white transition-colors" />
+              <span>Start Free 14-Day Trial</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+
+            <Link 
+              href="/demo" 
+              className="w-full sm:w-auto bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-slate-300 text-slate-800 px-8 py-4 rounded-full font-bold text-base transition-all duration-300 shadow-xs hover:shadow-md flex items-center justify-center gap-2.5 cursor-pointer"
+            >
+              <Play className="w-4 h-4 text-emerald-600 fill-emerald-600" />
+              <span>Watch 2-Min Demo</span>
             </Link>
           </div>
 
-          {/* Trust Proof / Rating */}
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 text-sm text-gray-500 font-medium">
-            <div className="flex items-center gap-1 text-amber-500">
-              <Star className="w-4 h-4 fill-current" />
-              <Star className="w-4 h-4 fill-current" />
-              <Star className="w-4 h-4 fill-current" />
-              <Star className="w-4 h-4 fill-current" />
-              <Star className="w-4 h-4 fill-current" />
+          {/* Micro Trust Indicators */}
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-slate-500 font-medium">
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#00a859]" /> No credit card needed
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#00a859]" /> Official WhatsApp Business API
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#00a859]" /> 3-Minute 1-Click Setup
+            </span>
+          </div>
+
+          {/* Star Rating & Global Customer Trust */}
+          <div className="pt-5 flex flex-col sm:flex-row items-center justify-center gap-3 text-sm text-slate-600 font-medium">
+            <div className="flex items-center gap-1 bg-amber-50 border border-amber-200/70 px-3 py-1 rounded-full text-amber-600 shadow-2xs">
+              <div className="flex text-amber-500">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                ))}
+              </div>
+              <span className="font-bold text-slate-900 ml-1">4.9/5</span>
+              <span className="text-xs text-slate-500">(2,400+ reviews)</span>
             </div>
-            <span>Trusted by 16,000+ customers worldwide</span>
+            <span className="text-slate-500">Trusted by <strong className="text-slate-900 font-semibold">1000+ businesses</strong> in 100+ countries</span>
           </div>
         </motion.div>
 
-        {/* Centered Wide Mockup Showcase with Smooth Reveal Animation */}
+        {/* Centered Clean Image Showcase with Floating Metric Badges */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95, y: 30 }}
+          initial={{ opacity: 0, scale: 0.97, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-16 w-full"
+          transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+          className="mt-14 sm:mt-16 w-full relative max-w-5xl mx-auto"
         >
-          <div className="relative bg-black/5 rounded-3xl p-4 sm:p-8 text-[#1d1d1d] shadow-2xl shadow-gray-200/60 border border-gray-200 text-left">
-            
-            {/* Top Bar inside mockup */}
-            <div className="flex items-center justify-between pb-4 sm:pb-6 border-b border-gray-200">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                <div className="w-3 h-3 rounded-full bg-green-400"></div>
+          {/* Floating Metric Card: Left */}
+          <motion.div 
+            animate={{ y: [0, -6, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="hidden lg:flex absolute -left-6 top-1/4 z-20 bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl p-4 shadow-xl shadow-slate-200/60 items-center gap-3.5 text-left max-w-xs"
+          >
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0 text-emerald-600">
+              <TrendingUp className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs font-bold text-emerald-700 uppercase tracking-wide">Live Metric</span>
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
               </div>
-              <div className="flex items-center gap-2 text-xs text-gray-500 font-mono">
-                <ShieldCheck className="w-4 h-4 text-[#00a859]" />
-                <span>WATI Unified Team Inbox Preview</span>
+              <p className="text-sm font-black text-slate-900">98.4% Open Rate</p>
+              <p className="text-[11px] text-slate-500">5,000+ WhatsApp broadcast delivered</p>
+            </div>
+          </motion.div>
+
+          {/* Floating Metric Card: Right */}
+          <motion.div 
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+            className="hidden lg:flex absolute -right-6 bottom-1/4 z-20 bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl p-4 shadow-xl shadow-slate-200/60 items-center gap-3.5 text-left max-w-xs"
+          >
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0 text-emerald-700">
+              <Bot className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs font-bold text-emerald-800 uppercase tracking-wide">Replyly AI Bot</span>
+                <Sparkles className="w-3 h-3 text-[#00a859]" />
               </div>
+              <p className="text-sm font-black text-slate-900">Deal Closed ($1,450)</p>
+              <p className="text-[11px] text-slate-500">Automated checkout in 42 seconds</p>
             </div>
+          </motion.div>
 
-            {/* Clean Hero Image Replacement */}
-            <div className="py-6 sm:py-8 relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-inner bg-white border border-gray-200/60">
-              <Image 
-                src="/hero2.png" 
-                alt="Wati Platform Preview Dashboard"
-                fill
-                priority
-                className="object-cover object-center"
-              />
-            </div>
+          {/* Pure Clean Dashboard Image Showcase */}
+          <div className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-slate-300/50 border border-slate-200/90 bg-slate-50 group">
+            <Image 
+              src="/hero2.png" 
+              alt="Replyly AI Conversational Dashboard Preview"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1080px"
+              className="object-cover object-center group-hover:scale-[1.008] transition-transform duration-500"
+            />
+          </div>
+        </motion.div>
 
-            {/* Footer Badge */}
-            <div className="pt-6 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-600 gap-2">
-              <span className="font-medium">🟢 Connected to WhatsApp Business API</span>
-              <span className="text-[#166534] font-bold">10X Your Performance with Wati AI</span>
-            </div>
-
+        {/* Feature Badges Bottom Bar */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="mt-12 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto pt-4 text-left"
+        >
+          <div className="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-2xs hover:shadow-sm transition-shadow">
+            <p className="text-2xl sm:text-3xl font-extrabold text-slate-900">98%</p>
+            <p className="text-xs sm:text-sm text-slate-600 font-medium mt-0.5">Campaign Open Rates</p>
+          </div>
+          <div className="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-2xs hover:shadow-sm transition-shadow">
+            <p className="text-2xl sm:text-3xl font-extrabold text-emerald-600">3.8x</p>
+            <p className="text-xs sm:text-sm text-slate-600 font-medium mt-0.5">Faster Sales Conversions</p>
+          </div>
+          <div className="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-2xs hover:shadow-sm transition-shadow">
+            <p className="text-2xl sm:text-3xl font-extrabold text-slate-900">85%</p>
+            <p className="text-xs sm:text-sm text-slate-600 font-medium mt-0.5">Auto Query Resolution</p>
+          </div>
+          <div className="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-2xs hover:shadow-sm transition-shadow">
+            <p className="text-2xl sm:text-3xl font-extrabold text-emerald-600">24/7</p>
+            <p className="text-xs sm:text-sm text-slate-600 font-medium mt-0.5">AI Customer Support</p>
           </div>
         </motion.div>
 
