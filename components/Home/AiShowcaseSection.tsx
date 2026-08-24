@@ -33,6 +33,15 @@ const TAB_CONTENT = {
   },
 } as const;
 
+// Smooth Spring Animations Preset
+
+const springTransition = {
+  type: "spring",
+  stiffness: 100,
+  damping: 20,
+  mass: 0.8,
+} as const;
+
 export default function AiShowcaseSection() {
   const [activeTab, setActiveTab] = useState<"support" | "sales">("support");
   const content = TAB_CONTENT[activeTab];
@@ -44,14 +53,20 @@ export default function AiShowcaseSection() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         
-        {/* Animated Tab Switcher */}
-        <div className="flex justify-center mb-10 sm:mb-14">
+        {/* Animated Tab Switcher with Scroll Fade/Slide */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ }}
+          className="flex justify-center mb-10 sm:mb-14"
+        >
           <div className="bg-gray-100/90 backdrop-blur-md p-1.5 rounded-full inline-flex gap-2 border border-gray-200/80 shadow-inner">
             {(["support", "sales"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`relative px-5 sm:px-8 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-extrabold transition-all duration-300 cursor-pointer ${
+                className={`relative px-5 sm:px-8 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-extrabold transition-colors duration-300 cursor-pointer ${
                   activeTab === tab ? "text-[#1d1d1d]" : "text-gray-500 hover:text-[#1d1d1d]"
                 }`}
               >
@@ -59,32 +74,38 @@ export default function AiShowcaseSection() {
                   <motion.div 
                     layoutId="activeTabBadge"
                     className="absolute inset-0 bg-white rounded-full shadow-md border border-gray-200/60 -z-10"
-                    transition={{ type: "spring", stiffness: 350, damping: 28 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
                 {tab === "support" ? "AI Support Agent" : "Inbound Intelligence Agent"}
               </button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Dynamic Alternating Showcase Grid */}
         <AnimatePresence mode="wait">
           <motion.div 
             key={activeTab}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 20, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.98 }}
+            transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1.0] }}
             className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
           >
             
             {/* Text Card Column */}
-            <div className={`${
-              activeTab === "support" 
-                ? "lg:col-span-5 lg:order-1" 
-                : "lg:col-span-5 lg:order-2"
-            }`}>
+            <motion.div 
+              initial={{ opacity: 0, x: activeTab === "support" ? -30 : 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={springTransition}
+              className={`${
+                activeTab === "support" 
+                  ? "lg:col-span-5 lg:order-1" 
+                  : "lg:col-span-5 lg:order-2"
+              }`}
+            >
               <div className="bg-slate-50/90 border border-slate-200/80 rounded-3xl p-6 sm:p-8 lg:p-9 shadow-sm space-y-6">
                 
                 <div className="flex items-center justify-between">
@@ -128,15 +149,21 @@ export default function AiShowcaseSection() {
                 </div>
 
               </div>
-            </div>
+            </motion.div>
 
             {/* Responsive Image Showcase Column */}
-            <div className={`${
-              activeTab === "support" 
-                ? "lg:col-span-7 lg:order-2" 
-                : "lg:col-span-7 lg:order-1"
-            }`}>
-              <div className="relative w-full aspect-[16/10] ">
+            <motion.div 
+              initial={{ opacity: 0, x: activeTab === "support" ? 30 : -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={springTransition}
+              className={`${
+                activeTab === "support" 
+                  ? "lg:col-span-7 lg:order-2" 
+                  : "lg:col-span-7 lg:order-1"
+              }`}
+            >
+              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200/80 shadow-xs">
                 <Image 
                   src={content.image}
                   alt={content.title}
@@ -146,7 +173,7 @@ export default function AiShowcaseSection() {
                   priority
                 />
               </div>
-            </div>
+            </motion.div>
 
           </motion.div>
         </AnimatePresence>

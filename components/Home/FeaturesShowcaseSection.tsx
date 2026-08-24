@@ -49,6 +49,14 @@ const FEATURE_CONTENT = {
   },
 } as const;
 
+// Smooth Spring Animations Preset
+const springTransition = {
+  type: "spring",
+  stiffness: 100,
+  damping: 20,
+  mass: 0.8,
+};
+
 export default function FeaturesShowcaseSection() {
   const [activeTab, setActiveTab] = useState<"inbox" | "broadcast" | "crm">("inbox");
   const currentFeature = FEATURE_CONTENT[activeTab];
@@ -61,8 +69,14 @@ export default function FeaturesShowcaseSection() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         
-        {/* Animated Tab Switcher */}
-        <div className="flex justify-center mb-10 sm:mb-14">
+        {/* Animated Tab Switcher with Scroll Fade/Slide */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          className="flex justify-center mb-10 sm:mb-14"
+        >
           <div className="bg-gray-100/90 backdrop-blur-md p-1.5 rounded-full inline-flex flex-wrap justify-center gap-2 border border-gray-200/80 shadow-inner">
             {(["inbox", "broadcast", "crm"] as const).map((tab) => {
               const labels = {
@@ -74,7 +88,7 @@ export default function FeaturesShowcaseSection() {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`relative px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-extrabold transition-all duration-300 cursor-pointer ${
+                  className={`relative px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-extrabold transition-colors duration-300 cursor-pointer ${
                     activeTab === tab ? "text-[#1d1d1d]" : "text-gray-500 hover:text-[#1d1d1d]"
                   }`}
                 >
@@ -82,7 +96,7 @@ export default function FeaturesShowcaseSection() {
                     <motion.div 
                       layoutId="featureTabSwitcher" 
                       className="absolute inset-0 bg-white rounded-full shadow-md border border-gray-200/80 -z-10"
-                      transition={{ type: "spring", stiffness: 350, damping: 28 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
                   {labels[tab]}
@@ -90,21 +104,27 @@ export default function FeaturesShowcaseSection() {
               );
             })}
           </div>
-        </div>
+        </motion.div>
 
         {/* Feature Display Grid */}
         <AnimatePresence mode="wait">
           <motion.div 
             key={activeTab}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 20, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.98 }}
+            transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1.0] }}
             className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
           >
             
             {/* Left Text Card */}
-            <div className="lg:col-span-5">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              className="lg:col-span-5"
+            >
               <div className="bg-slate-50/90 border border-slate-200/80 rounded-3xl p-6 sm:p-8 lg:p-9 shadow-xs space-y-6">
                 
                 <div className="flex items-center justify-between">
@@ -148,14 +168,20 @@ export default function FeaturesShowcaseSection() {
                 </div>
 
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Preview Area */}
-            <div className="lg:col-span-7">
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              className="lg:col-span-7"
+            >
               
               {/* INBOX tab: Show shared-team.png directly with clean responsive container */}
               {"useImage" in currentFeature && currentFeature.useImage ? (
-                <div className="relative w-full aspect-[16/10]">
+                <div className="relative w-full aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200/80 shadow-xs">
                   <Image
                     src={(currentFeature as { useImage: true; image: string }).image}
                     alt={currentFeature.title}
@@ -182,7 +208,7 @@ export default function FeaturesShowcaseSection() {
 
                   {/* Broadcast */}
                   {activeTab === "broadcast" && (
-                    <motion.div key="broadcast-content" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-4">
+                    <motion.div key="broadcast-content" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }} className="space-y-4">
                       <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/70 flex items-center justify-between shadow-2xs">
                         <div>
                           <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Active Campaign</p>
@@ -214,7 +240,7 @@ export default function FeaturesShowcaseSection() {
 
                   {/* CRM */}
                   {activeTab === "crm" && (
-                    <motion.div key="crm-content" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-4">
+                    <motion.div key="crm-content" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }} className="space-y-4">
                       <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/70 flex items-center justify-between shadow-2xs">
                         <div>
                           <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Active Deal Value</p>
@@ -244,7 +270,7 @@ export default function FeaturesShowcaseSection() {
                 </div>
               )}
 
-            </div>
+            </motion.div>
 
           </motion.div>
         </AnimatePresence>

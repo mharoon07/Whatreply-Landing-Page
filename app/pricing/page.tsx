@@ -13,7 +13,6 @@ export default function PricingPage() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Triggers true when the pricing section enters the viewport, false when it leaves (top or bottom)
         if (entry.isIntersecting) {
           setIsSectionVisible(true);
         } else {
@@ -21,7 +20,6 @@ export default function PricingPage() {
         }
       },
       { 
-        // Trigger slightly before it hits dead-center for a smooth, professional feel
         threshold: 0.45, 
         rootMargin: '0px 0px -50px 0px' 
       }
@@ -41,6 +39,21 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900 selection:bg-[#00a859] selection:text-white overflow-x-hidden">
       
+      {/* Custom Keyframes for Premium Floating Animation */}
+      <style jsx global>{`
+        @keyframes floatSlow {
+          0%, 100% {
+            transform: translateY(0px) rotate(12deg) scale(1.1);
+          }
+          50% {
+            transform: translateY(-10px) rotate(15deg) scale(1.12);
+          }
+        }
+        .animate-float-badge {
+          animation: floatSlow 4s ease-in-out infinite;
+        }
+      `}</style>
+
       {/* Navbar Component Import */}
       <Navbar />
 
@@ -89,7 +102,7 @@ export default function PricingPage() {
       <section ref={sectionRef} className="pb-32 pt-20 px-4 md:px-8 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center relative min-h-[600px]">
           
-          {/* Left Card: Tucks behind center when up/down, slides out left with smooth easing */}
+          {/* Left Card */}
           <div
             className={`bg-white rounded-3xl p-8 border border-gray-200 shadow-xl transition-all duration-700 ease-out flex flex-col justify-between h-full z-10 origin-right ${
               isSectionVisible
@@ -129,17 +142,22 @@ export default function PricingPage() {
             </button>
           </div>
 
-          {/* Center Card: Anchored firmly in place as the master anchor */}
+          {/* Center Card: High-End HDR Image + Floating Animation */}
           <div className="bg-white rounded-3xl p-8 border-2 border-[#00a859] shadow-2xl relative z-30 transform lg:-translate-y-4 flex flex-col justify-between h-full">
             
-            {/* 3D Megaphone Badge */}
+            {/* 3D Megaphone Badge with HD Supersampling & Smooth Float Animation */}
             <div className="absolute -top-16 -right-8 w-32 h-32 z-45 pointer-events-none">
-              <Image
-                src="/3D.png"
-                alt="3D Megaphone"
-                fill
-                className="object-contain drop-shadow-2xl rotate-12 transform scale-110"
-              />
+              <div className="animate-float-badge w-full h-full relative">
+                <Image
+                  src="/3d.png"
+                  alt="3D Megaphone"
+                  width={256}
+                  height={256}
+                  quality={100}
+                  priority
+                  className="w-full h-full object-contain drop-shadow-2xl filter contrast-105"
+                />
+              </div>
             </div>
 
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#00a859] text-white text-xs font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md z-40">
@@ -182,7 +200,7 @@ export default function PricingPage() {
             </button>
           </div>
 
-          {/* Right Card: Tucks behind center when up/down, slides out right with smooth easing */}
+          {/* Right Card */}
           <div
             className={`bg-white rounded-3xl p-8 border border-gray-200 shadow-xl transition-all duration-700 ease-out flex flex-col justify-between h-full z-10 origin-left ${
               isSectionVisible

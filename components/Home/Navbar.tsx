@@ -129,7 +129,7 @@ export default function Navbar() {
           </div>
 
           <Link
-            href="/pricing"
+          href="/pricing"
             className="hover:text-[#00e785] transition-colors"
           >
             Pricing
@@ -186,7 +186,7 @@ export default function Navbar() {
             Product
           </Link>
           <Link
-            href="#pricing"
+            href="/pricing"
             onClick={() => setIsOpen(false)}
             className="text-lg font-bold text-[#1d1d1d] hover:text-[#00e785]"
           >

@@ -1,7 +1,9 @@
-import type { Metadata, } from "next";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
+import SmoothScroll from "@/components/smoothscroll/scroll";
+ // Adjust path according to your folder structure
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,12 +22,10 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Replyly - AI-Powered WhatsApp Platform",
+  title: "Whatreply - AI-Powered WhatsApp Platform",
   description:
     "The #1 business messaging platform for marketing, sales, and customer support automation.",
 };
-
-
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -33,7 +33,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${plusJakarta.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-plus-jakarta">{children}</body>
+      <body className="min-h-full flex flex-col font-plus-jakarta">
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }
