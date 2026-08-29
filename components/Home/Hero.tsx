@@ -1,16 +1,15 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { 
   ArrowRight, 
   Star, 
-  Sparkles, 
   Play, 
+  Pause,
   Zap, 
-  Bot, 
   CheckCircle2, 
-  TrendingUp 
+  AlertCircle
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -68,6 +67,38 @@ function WavyUnderline() {
 }
 
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  const togglePlay = async () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    try {
+      if (video.paused) {
+        await video.play();
+        setIsPlaying(true);
+      } else {
+        video.pause();
+        setIsPlaying(false);
+      }
+    } catch (err: any) {
+      if (err.name !== "AbortError") {
+        console.warn("Video playback error:", err);
+      }
+    }
+  };
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      const newMuted = !isMuted;
+      videoRef.current.muted = newMuted;
+      setIsMuted(newMuted);
+    }
+  };
+
   return (
     <section 
       aria-label="Hero Section" 
@@ -165,61 +196,73 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Centered Clean Image Showcase with Floating Metric Badges */}
+        {/* Centered Video Showcase */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.97, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-          className="mt-14 sm:mt-16 w-full relative max-w-5xl mx-auto"
+          className="mt-10 sm:mt-12 w-full relative max-w-4xl mx-auto px-2 sm:px-0"
         >
-          {/* Floating Metric Card: Left */}
-          <motion.div 
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="hidden lg:flex absolute -left-6 top-1/4 z-20 bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl p-4 shadow-xl shadow-slate-200/60 items-center gap-3.5 text-left max-w-xs"
+          <div 
+            onClick={togglePlay}
+            className="relative w-full aspect-video rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-slate-300/50 border border-slate-200/90 bg-slate-900 group cursor-pointer"
           >
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0 text-emerald-600">
-              <TrendingUp className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-xs font-bold text-emerald-700 uppercase tracking-wide">Live Metric</span>
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+            {hasError ? (
+              <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-slate-900 text-slate-300">
+                <AlertCircle className="w-12 h-12 text-slate-400 mb-3" />
+                <p className="font-bold text-base text-white">Video preview unavailable</p>
+                <p className="text-xs text-slate-400 mt-1">Please ensure <code className="bg-slate-800 text-emerald-300 px-1.5 py-0.5 rounded">hero-intro.mp4</code> is placed in your <code className="bg-slate-800 text-emerald-300 px-1.5 py-0.5 rounded">/public</code> directory.</p>
               </div>
-              <p className="text-sm font-black text-slate-900">98.4% Open Rate</p>
-              <p className="text-[11px] text-slate-500">5,000+ WhatsApp broadcast delivered</p>
-            </div>
-          </motion.div>
+            ) : (
+              <video 
+                ref={videoRef}
+                src="/hero-intro2.mp4"
+                loop
+                muted={isMuted}
+                playsInline
+                preload="auto"
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onError={() => setHasError(true)}
+                className="w-full h-full object-cover"
+              >
+                Your browser does not support the video tag.
+              </video>
+            )}
 
-          {/* Floating Metric Card: Right */}
-          <motion.div 
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-            className="hidden lg:flex absolute -right-6 bottom-1/4 z-20 bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl p-4 shadow-xl shadow-slate-200/60 items-center gap-3.5 text-left max-w-xs"
-          >
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0 text-emerald-700">
-              <Bot className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-xs font-bold text-emerald-800 uppercase tracking-wide">Replyly AI Bot</span>
-                <Sparkles className="w-3 h-3 text-[#00a859]" />
+            {/* Ultra Liquid Glass Center Button (Play when paused, Pause on hover when playing) */}
+            {!hasError && (
+              <div 
+                className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
+                  !isPlaying 
+                    ? "opacity-100 bg-black/40 backdrop-blur-[3px]" 
+                    : "opacity-0 group-hover:opacity-100 bg-black/30 backdrop-blur-[2px]"
+                }`}
+              >
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    togglePlay();
+                  }}
+                  className="relative group/glass flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-b from-white/35 via-white/15 to-white/5 hover:from-white/45 hover:to-white/15 backdrop-blur-2xl border border-white/50 shadow-[0_12px_30px_rgba(0,0,0,0.5),inset_0_2px_4px_rgba(255,255,255,0.7)] transform hover:scale-110 active:scale-95 transition-all duration-300 ring-1 ring-white/30 cursor-pointer overflow-hidden"
+                  aria-label={isPlaying ? "Pause video" : "Play video"}
+                >
+                  {/* Curved Top Glossy Reflection Arc */}
+                  <span className="absolute -top-1/2 left-0 right-0 h-1/2 bg-gradient-to-b from-white/60 to-transparent pointer-events-none rounded-t-full" />
+                  
+                  {/* Subtle Inner Glow Highlight */}
+                  <span className="absolute inset-0 rounded-full bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover/glass:opacity-100 transition-opacity pointer-events-none" />
+
+                  {/* Dynamic Icon */}
+                  {isPlaying ? (
+                    <Pause className="w-6 h-6 sm:w-7 sm:h-7 fill-white text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.4)] relative z-10" />
+                  ) : (
+                    <Play className="w-6 h-6 sm:w-7 sm:h-7 fill-white text-white ml-0.5 drop-shadow-[0_2px_6px_rgba(0,0,0,0.4)] relative z-10" />
+                  )}
+                </button>
               </div>
-              <p className="text-sm font-black text-slate-900">Deal Closed ($1,450)</p>
-              <p className="text-[11px] text-slate-500">Automated checkout in 42 seconds</p>
-            </div>
-          </motion.div>
-
-          {/* Pure Clean Dashboard Image Showcase */}
-          <div className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-slate-300/50 border border-slate-200/90 bg-slate-50 group">
-            <Image 
-              src="/hero2.png" 
-              alt="Replyly AI Conversational Dashboard Preview"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1080px"
-              className="object-cover object-center group-hover:scale-[1.008] transition-transform duration-500"
-            />
+            )}
           </div>
         </motion.div>
 
