@@ -49,8 +49,8 @@ export default function TrustedBrandsSection() {
           </h2>
           
           {/* Spacious, High-Impact Paragraph */}
-          <p className="text-base sm:text-lg lg:text-xl text-slate-600 font-normal max-w-2xl mx-auto leading-relaxed pt-1">
-            Leading direct-to-consumer brands, fintech leaders, and global enterprises rely on Replyly to scale automated sales, streamline omnichannel support, and unlock 3x higher revenue.
+          <p className="text-base sm:text-lg text-slate-600 font-normal max-w-xl sm:max-w-2xl mx-auto leading-relaxed pt-1">
+            Scaling brands and global enterprises rely on Replyly to automate sales, streamline support, and 3x revenue.
           </p>
 
           {/* Spacious & Clean Trust Indicators */}

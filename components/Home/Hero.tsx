@@ -102,7 +102,7 @@ export default function Hero() {
   return (
     <section 
       aria-label="Hero Section" 
-      className="relative overflow-hidden bg-white pt-28 pb-16 lg:pt-36 lg:pb-28"
+      className="relative overflow-hidden bg-white pt-20 pb-12 lg:pt-24 lg:pb-20"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
         
@@ -111,7 +111,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="inline-flex justify-center mb-6 sm:mb-8"
+          className="inline-flex justify-center mb-4 sm:mb-5"
         >
           <Link
             href="/free-trial"
@@ -136,7 +136,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.08, ease: "easeOut" }}
-          className="space-y-6 max-w-4xl mx-auto"
+          className="space-y-4 sm:space-y-5 max-w-4xl mx-auto"
         >
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1] sm:leading-[1.12]">
             Turn Every Message Into Instant Revenue With{" "}
@@ -144,32 +144,64 @@ export default function Hero() {
           </h1>
           
           {/* Subtext: Clear, Persuasive, Captivating */}
-          <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal pt-2">
-            Stop losing qualified leads to slow replies. Whatreply empowers scaling brands to automate <strong className="font-semibold text-slate-900">85% of customer queries</strong>, broadcast targeted campaigns with <strong className="font-semibold text-emerald-700">98% open rates</strong>, and close deals 3x faster on WhatsApp & omnichannel.
+          <p className="text-base sm:text-lg text-slate-600 max-w-xl sm:max-w-2xl mx-auto leading-relaxed font-normal pt-1">
+            Automate <strong className="font-semibold text-slate-900">85% of customer queries</strong>, broadcast targeted campaigns with <strong className="font-semibold text-emerald-700">98% open rates</strong>, and close WhatsApp sales 3x faster.
           </p>
 
           {/* Centered Action-Packed CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 pt-4 sm:pt-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 pt-2 sm:pt-3">
+            {/* Primary CTA: Start Free Trial with 3D Dual-Layer Liquid Wave & Moving Border Line */}
             <Link 
               href="/free-trial" 
-              className="group relative w-full sm:w-auto overflow-hidden bg-[#1d1d1d] hover:bg-emerald-600 text-white px-8 py-4 rounded-full font-bold text-base transition-all duration-300 shadow-xl shadow-slate-900/10 hover:shadow-emerald-500/25 hover:-translate-y-0.5 flex items-center justify-center gap-3 cursor-pointer"
+              className="group relative w-full sm:w-auto p-[1.5px] rounded-full overflow-hidden transition-all duration-300 shadow-xl shadow-slate-900/10 hover:-translate-y-0.5 cursor-pointer"
             >
-              <Zap className="w-5 h-5 text-[#00e785] group-hover:text-white transition-colors" />
-              <span>Start Free 14-Day Trial</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              {/* Slow Moving Green Light Beam Tracing the Border Line */}
+              <span className="absolute -inset-[100%] rounded-full bg-[conic-gradient(from_0deg,transparent_0_270deg,#00e785_320deg,#10b981_350deg,transparent_360deg)] opacity-0 group-hover:opacity-100 animate-[spin_6s_linear_infinite] transition-opacity duration-500 pointer-events-none z-0" />
+              
+              {/* Inner Button Surface */}
+              <span className="relative w-full h-full bg-[#1d1d1d] text-white px-8 py-4 rounded-full font-bold text-base flex items-center justify-center gap-3 overflow-hidden z-10">
+                {/* Secondary Translucent Fluid Wave */}
+                <span className="absolute -inset-x-6 -bottom-6 h-[200%] bg-[#00e785]/40 rounded-[100%_100%_0_0] translate-y-full group-hover:translate-y-[-2%] transition-transform duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] delay-100 -z-10 pointer-events-none" />
+
+                {/* Primary Solid Liquid Wave */}
+                <span className="absolute -inset-x-6 -bottom-6 h-[200%] bg-[#00e785] rounded-[100%_100%_0_0] translate-y-full group-hover:translate-y-0 transition-transform duration-900 ease-[cubic-bezier(0.19,1,0.22,1)] -z-10 overflow-hidden pointer-events-none">
+                  {/* Glossy Liquid Surface Meniscus Highlight */}
+                  <span className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-white/60 via-white/20 to-transparent" />
+                </span>
+                
+                <Zap className="w-5 h-5 text-[#00e785] group-hover:text-slate-950 transition-colors duration-500 relative z-10" />
+                <span className="relative z-10 group-hover:text-slate-950 transition-colors duration-500">Start Free 14-Day Trial</span>
+                <ArrowRight className="w-4 h-4 text-[#00e785] group-hover:text-slate-950 group-hover:translate-x-1 transition-all duration-500 relative z-10" />
+              </span>
             </Link>
 
+            {/* Secondary CTA: Watch Demo with 3D Dual-Layer Liquid Wave & Moving Border Line */}
             <Link 
               href="/demo" 
-              className="w-full sm:w-auto bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-slate-300 text-slate-800 px-8 py-4 rounded-full font-bold text-base transition-all duration-300 shadow-xs hover:shadow-md flex items-center justify-center gap-2.5 cursor-pointer"
+              className="group relative w-full sm:w-auto p-[1.5px] rounded-full overflow-hidden transition-all duration-300 shadow-xs hover:shadow-md cursor-pointer"
             >
-              <Play className="w-4 h-4 text-emerald-600 fill-emerald-600" />
-              <span>Watch 2-Min Demo</span>
+              {/* Slow Moving Green Light Beam Tracing the Border Line */}
+              <span className="absolute -inset-[100%] rounded-full bg-[conic-gradient(from_0deg,transparent_0_270deg,#00e785_320deg,#10b981_350deg,transparent_360deg)] opacity-0 group-hover:opacity-100 animate-[spin_6s_linear_infinite] transition-opacity duration-500 pointer-events-none z-0" />
+
+              {/* Inner Button Surface */}
+              <span className="relative w-full h-full bg-white text-slate-800 border border-slate-200 group-hover:border-transparent px-8 py-4 rounded-full font-bold text-base flex items-center justify-center gap-2.5 overflow-hidden z-10">
+                {/* Secondary Translucent Fluid Wave */}
+                <span className="absolute -inset-x-6 -bottom-6 h-[200%] bg-slate-700/40 rounded-[100%_100%_0_0] translate-y-full group-hover:translate-y-[-2%] transition-transform duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] delay-100 -z-10 pointer-events-none" />
+
+                {/* Primary Solid Liquid Wave */}
+                <span className="absolute -inset-x-6 -bottom-6 h-[200%] bg-[#1d1d1d] rounded-[100%_100%_0_0] translate-y-full group-hover:translate-y-0 transition-transform duration-900 ease-[cubic-bezier(0.19,1,0.22,1)] -z-10 overflow-hidden pointer-events-none">
+                  {/* Glossy Liquid Surface Meniscus Highlight */}
+                  <span className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-white/40 via-white/10 to-transparent" />
+                </span>
+
+                <Play className="w-4 h-4 text-emerald-600 fill-emerald-600 group-hover:text-[#00e785] group-hover:fill-[#00e785] transition-colors duration-500 relative z-10" />
+                <span className="relative z-10 group-hover:text-white transition-colors duration-500">Watch 2-Min Demo</span>
+              </span>
             </Link>
           </div>
 
           {/* Micro Trust Indicators */}
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-slate-500 font-medium">
+          <div className="pt-1.5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-slate-500 font-medium">
             <span className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#00a859]" /> No credit card needed
             </span>
@@ -182,7 +214,7 @@ export default function Hero() {
           </div>
 
           {/* Star Rating & Global Customer Trust */}
-          <div className="pt-5 flex flex-col sm:flex-row items-center justify-center gap-3 text-sm text-slate-600 font-medium">
+          <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3 text-sm text-slate-600 font-medium">
             <div className="flex items-center gap-1 bg-amber-50 border border-amber-200/70 px-3 py-1 rounded-full text-amber-600 shadow-2xs">
               <div className="flex text-amber-500">
                 {[...Array(5)].map((_, i) => (
@@ -201,7 +233,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.97, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-          className="mt-10 sm:mt-12 w-full relative max-w-4xl mx-auto px-2 sm:px-0"
+          className="mt-8 sm:mt-9 w-full relative max-w-4xl mx-auto px-2 sm:px-0"
         >
           <div 
             onClick={togglePlay}
