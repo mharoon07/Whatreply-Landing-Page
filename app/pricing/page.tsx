@@ -142,8 +142,8 @@ export default function PricingPage() {
             </button>
           </div>
 
-          {/* Center Card: High-End HDR Image + Floating Animation */}
-          <div className="bg-white rounded-3xl p-8 border-2 border-[#00a859] shadow-2xl relative z-30 transform lg:-translate-y-4 flex flex-col justify-between h-full">
+          {/* Center Card: High-End HDR Image + Floating Animation (Growth AI - Premium Black) */}
+          <div className="bg-[#1d1d1d] rounded-3xl p-8 border-2 border-[#00e785]/80 shadow-2xl shadow-emerald-950/30 relative z-30 transform lg:-translate-y-4 flex flex-col justify-between h-full text-white">
             
             {/* 3D Megaphone Badge with HD Supersampling & Smooth Float Animation */}
             <div className="absolute -top-16 -right-8 w-32 h-32 z-45 pointer-events-none">
@@ -160,42 +160,42 @@ export default function PricingPage() {
               </div>
             </div>
 
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#00a859] text-white text-xs font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md z-40">
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#00e785] text-slate-950 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md z-40">
               Most Popular
             </div>
 
             <div>
-              <h3 className="text-2xl font-black text-gray-900 pt-2">Growth AI</h3>
-              <p className="text-xs text-gray-500 mt-1">Ideal for scaling businesses & high volume.</p>
+              <h3 className="text-2xl font-black text-white pt-2">Growth AI</h3>
+              <p className="text-xs text-slate-400 mt-1">Ideal for scaling businesses & high volume.</p>
               
               <div className="mt-6 flex items-baseline">
-                <span className="text-5xl font-black tracking-tight text-[#00a859]">
+                <span className="text-5xl font-black tracking-tight text-[#00e785]">
                   {billingCycle === 'monthly' ? '$129' : '$99'}
                 </span>
-                <span className="ml-1 text-gray-500 text-sm">/mo</span>
+                <span className="ml-1 text-slate-400 text-sm">/mo</span>
               </div>
 
-              <ul className="mt-6 space-y-3.5 text-sm text-gray-700 font-medium">
+              <ul className="mt-6 space-y-3.5 text-sm text-slate-200 font-medium">
                 <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 rounded-full bg-[#00a859] text-white flex items-center justify-center text-xs font-bold">✓</span>
+                  <span className="w-5 h-5 rounded-full bg-[#00e785] text-slate-950 flex items-center justify-center text-xs font-black shrink-0">✓</span>
                   Unlimited AI Chats
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 rounded-full bg-[#00a859] text-white flex items-center justify-center text-xs font-bold">✓</span>
+                  <span className="w-5 h-5 rounded-full bg-[#00e785] text-slate-950 flex items-center justify-center text-xs font-black shrink-0">✓</span>
                   Custom Chatbot Persona
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 rounded-full bg-[#00a859] text-white flex items-center justify-center text-xs font-bold">✓</span>
+                  <span className="w-5 h-5 rounded-full bg-[#00e785] text-slate-950 flex items-center justify-center text-xs font-black shrink-0">✓</span>
                   CRM Integrations (Shopify/HubSpot)
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 rounded-full bg-[#00a859] text-white flex items-center justify-center text-xs font-bold">✓</span>
+                  <span className="w-5 h-5 rounded-full bg-[#00e785] text-slate-950 flex items-center justify-center text-xs font-black shrink-0">✓</span>
                   24/7 Priority Support
                 </li>
               </ul>
             </div>
 
-            <button className="mt-8 w-full py-4 rounded-2xl bg-[#00a859] hover:bg-[#008f4c] text-white font-bold transition-all duration-300 cursor-pointer shadow-lg shadow-[#00a859]/30">
+            <button className="mt-8 w-full py-4 rounded-2xl bg-[#00e785] hover:bg-[#00c974] text-slate-950 font-black text-base transition-all duration-300 cursor-pointer shadow-lg shadow-[#00e785]/25 hover:shadow-[#00e785]/40 hover:-translate-y-0.5">
               Start Free Trial
             </button>
           </div>
