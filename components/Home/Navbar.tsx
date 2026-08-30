@@ -58,6 +58,7 @@ export default function Navbar() {
               src="/logo-navbar3.png"
               alt="Wati Logo"
               fill
+              sizes="192px"
               priority
               className="object-contain object-left"
             />
