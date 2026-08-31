@@ -7,17 +7,17 @@ import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 
 const SOLUTIONS = [
   {
-    name: "Wati for Marketing",
+    name: "Replyly for Marketing",
     desc: "Acquire and engage leads at scale",
     href: "https://app.whatreply.tech/en/login",
   },
   {
-    name: "Wati for Support",
+    name: "Replyly for Support",
     desc: "AI-powered query resolution",
     href: "https://app.whatreply.tech/en/login",
   },
   {
-    name: "Wati for Sales",
+    name: "Replyly for Sales",
     desc: "Nurture leads and close deals",
     href: "https://app.whatreply.tech/en/login",
   },
@@ -56,7 +56,7 @@ export default function Navbar() {
           <div className="relative w-48 h-16 flex items-center">
             <Image
               src="/logo-navbar3.png"
-              alt="Wati Logo"
+              alt="Replyly Logo"
               fill
               sizes="192px"
               priority
@@ -135,12 +135,7 @@ export default function Navbar() {
           >
             Pricing
           </Link>
-          <Link
-            href="#resources"
-            className="hover:text-[#00e785] transition-colors"
-          >
-            Resources
-          </Link>
+         
         </nav>
 
         {/* Desktop Action Buttons */}
@@ -193,13 +188,7 @@ export default function Navbar() {
           >
             Pricing
           </Link>
-          <Link
-            href="#resources"
-            onClick={() => setIsOpen(false)}
-            className="text-lg font-bold text-[#1d1d1d] hover:text-[#00e785]"
-          >
-            Resources
-          </Link>
+          
 
           <hr className="border-gray-100 my-2" />
 

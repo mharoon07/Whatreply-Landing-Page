@@ -5,15 +5,15 @@ import { Star, Globe, Building2, MessageCircle, ChevronLeft, ChevronRight, Spark
 import { useState, useEffect, useRef } from "react";
 
 const stats = [
-  { label: "Active Businesses", value: 1000, suffix: "+", icon: Building2, desc: "Scaling operations globally", badge: "Verified", isDecimal: false },
-  { label: "Countries Reached", value: 100, suffix: "+", icon: Globe, desc: "Worldwide enterprise trust", badge: "Global", isDecimal: false },
-  { label: "Messages Processed", value: 1, suffix: "M+", icon: MessageCircle, desc: "Daily conversational volume", badge: "High Speed", isDecimal: false },
+  { label: "Active Businesses", value: 20, suffix: "+", icon: Building2, desc: "Scaling operations daily", badge: "Verified", isDecimal: false },
+  { label: "Countries Reached", value: 5, suffix: "+", icon: Globe, desc: "Worldwide client trust", badge: "Global", isDecimal: false },
+  { label: "Messages Processed", value: 100, suffix: "K+", icon: MessageCircle, desc: "Conversational volume", badge: "High Speed", isDecimal: false },
   { label: "Customer Satisfaction", value: 4.9, suffix: "/5", icon: Star, desc: "Rated on top directories", badge: "Top Rated", isDecimal: true },
 ];
 
 const testimonials = [
   {
-    quote: "Wati transformed how our sales team closes inbound leads. The shared inbox and automated broadcasts boosted our conversion rate by over 45% in just two months.",
+    quote: "Replyly transformed how our sales team closes inbound leads. The shared inbox and automated broadcasts boosted our conversion rate by over 45% in just two months.",
     author: "Rohan Mehta",
     role: "Head of Growth",
     company: "Apex Retail Co.",
@@ -22,7 +22,7 @@ const testimonials = [
     rating: 5,
   },
   {
-    quote: "Setting up the official WhatsApp API used to be a nightmare. With Wati, we went live in under 10 minutes. Our customer support response time dropped from hours to seconds.",
+    quote: "Setting up the official WhatsApp API used to be a nightmare. With Replyly, we went live in under 10 minutes. Our customer support response time dropped from hours to seconds.",
     author: "Ayesha Siddiqui",
     role: "Customer Success Director",
     company: "UrbanEats Global",
@@ -146,7 +146,7 @@ export default function GlobalImpactTestimonialsSection() {
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
             Trusted by industry leaders <br />
             <span className="relative inline-block pb-2 px-3 mx-1 mt-2 sm:mt-0 bg-[#00a859] text-white rounded-xl shadow-lg transform -rotate-1">
-              across 100+ countries.
+              across 5+ countries.
             </span>
           </h2>
         </motion.div>

@@ -110,7 +110,7 @@ export default function GrowBetterSection() {
           </Link>
 
           <span className="text-xs text-gray-500 font-medium">
-            Join 1,000+ ambitious businesses automating their growth today.
+            Join 20+ ambitious businesses automating their growth today.
           </span>
         </motion.div>
 

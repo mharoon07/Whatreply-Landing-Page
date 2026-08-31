@@ -10,8 +10,7 @@ export default function PricingPage() {
   const [isSectionVisible, setIsSectionVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Intersection Observer: Cards tuck behind the center card when out of view, slide out when scrolled into view
-  useEffect(() => {
+   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -117,7 +116,7 @@ export default function PricingPage() {
               
               <div className="mt-6 flex items-baseline">
                 <span className="text-4xl font-extrabold tracking-tight">
-                  {billingCycle === 'monthly' ? '$49' : '$39'}
+                  {billingCycle === 'monthly' ? 'PKR 49' : 'PKR 39'}
                 </span>
                 <span className="ml-1 text-gray-500 text-sm">/mo</span>
               </div>
@@ -171,7 +170,7 @@ export default function PricingPage() {
               
               <div className="mt-6 flex items-baseline">
                 <span className="text-5xl font-black tracking-tight text-[#00e785]">
-                  {billingCycle === 'monthly' ? '$129' : '$99'}
+                  {billingCycle === 'monthly' ? 'PKR 129' : 'PKR 99'}
                 </span>
                 <span className="ml-1 text-slate-400 text-sm">/mo</span>
               </div>
@@ -215,7 +214,7 @@ export default function PricingPage() {
               
               <div className="mt-6 flex items-baseline">
                 <span className="text-4xl font-extrabold tracking-tight">
-                  {billingCycle === 'monthly' ? '$299' : '$249'}
+                  {billingCycle === 'monthly' ? 'PKR 299' : 'PKR 249'}
                 </span>
                 <span className="ml-1 text-gray-500 text-sm">/mo</span>
               </div>

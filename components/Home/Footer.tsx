@@ -5,40 +5,18 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 const footerLinks = {
-  solutions: [
-    { name: "AI Chatbots & Automation", href: "#" },
-    { name: "Shared Team Inbox", href: "#" },
-    { name: "Bulk Broadcast Campaigns", href: "#" },
-    { name: "CRM & E-Commerce Sync", href: "#" },
-    { name: "API & Webhook Integrations", href: "#" },
-  ],
-  company: [
-    { name: "About Our Vision", href: "#" },
-    { name: "Careers & Culture", href: "#" },
-    { name: "Press & Media Kit", href: "#" },
-    { name: "Global Partner Network", href: "#" },
-    { name: "Direct Contact", href: "#" },
-  ],
-  resources: [
-    { name: "Developer Documentation", href: "#" },
-    { name: "Interactive API Guides", href: "#" },
-    { name: "Case Studies & Growth", href: "#" },
-    { name: "Community Forum", href: "#" },
-    { name: "System Status & Uptime", href: "#" },
-  ],
   legal: [
-    { name: "Privacy Policy", href: "#" },
-    { name: "Terms of Service", href: "#" },
-    { name: "Security & Trust", href: "#" },
-    { name: "GDPR Compliance", href: "#" },
+    { name: "Privacy Policy", href: "/privacy" },
+    { name: "Terms of Service", href: "/terms" },
+    { name: "User Agreement", href: "/user-agreement" }
+    
   ],
 };
 
 export default function Footer() {
   return (
     <section className="bg-white pt-20 pb-0 overflow-hidden">
-      {/* Zero side margins, perfectly flush across the full width of the screen */}
-      <div className="w-full px-0 mx-0">
+       <div className="w-full px-0 mx-0">
         <footer className="bg-[#050505] text-white pt-24 px-6 sm:px-12 lg:px-20 pb-0 rounded-t-[3rem] sm:rounded-t-[4rem] relative overflow-hidden border-t border-gray-800">
           
           {/* Subtle Ambient Glow Effects without heavy black shadow */}
@@ -80,32 +58,20 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Links Grid Section */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-16 border-b border-gray-800/80">
-              {Object.entries(footerLinks).map(([key, links]) => (
-                <div key={key} className="space-y-4">
-                  <h4 className="text-xs font-black tracking-widest uppercase text-[#00e785]">{key}</h4>
-                  <ul className="space-y-3">
-                    {links.map((item, idx) => (
-                      <li key={idx}>
-                        <Link href={item.href} className="text-sm text-gray-400 hover:text-white transition-colors font-medium block">
-                          {item.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
+           
 
             {/* Bottom Bar Section */}
             <div className="pt-12 pb-2 flex flex-col gap-6">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-gray-400">
                 <p>© {new Date().getFullYear()} Replyly. All rights reserved.</p>
+                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+                  <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                  <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+                  <Link href="/user-agreement" className="hover:text-white transition-colors">User Agreement</Link>
+                </div>
                 <div className="flex items-center gap-4">
-                  <Link href="#" className="hover:text-white transition-colors">Twitter</Link>
-                  <Link href="#" className="hover:text-white transition-colors">LinkedIn</Link>
-                  <Link href="#" className="hover:text-white transition-colors">Dribbble</Link>
+                  <Link href="#" className="hover:text-white transition-colors">Instagram</Link>
+                  <Link href="#" className="hover:text-white transition-colors">Facebook</Link>
                 </div>
               </div>
 

@@ -1,16 +1,31 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { Star, ShieldCheck, Sparkles, TrendingUp } from "lucide-react";
+import { 
+  Star, 
+  ShieldCheck, 
+  Sparkles, 
+  TrendingUp, 
+  Activity, 
+  Zap, 
+  Boxes, 
+  Layers, 
+  Hexagon, 
+  Orbit, 
+  Cpu, 
+  Compass 
+} from "lucide-react";
 
 export default function TrustedBrandsSection() {
   const brands = [
-    { name: "Brand 1", logo: "/logo1.png", tag: "FINTECH" },
-    { name: "Brand 2", logo: "/logo2.png", tag: "E-COMMERCE" },
-    { name: "Brand 3", logo: "/logo3.png", tag: "SUPPORT" },
-    { name: "Brand 4", logo: "/logo4.png", tag: "LOGISTICS" },
-    { name: "Brand 5", logo: "/logo5.png", tag: "MARKETING" },
+    { name: "PulseFlow", tag: "AI Workflows", icon: Activity },
+    { name: "NovaPay", tag: "Fintech", icon: Zap },
+    { name: "OmniSync", tag: "E-Commerce", icon: Boxes },
+    { name: "CloudScale", tag: "Cloud Infra", icon: Layers },
+    { name: "ApexLogix", tag: "Logistics", icon: Hexagon },
+    { name: "Zenith AI", tag: "Enterprise AI", icon: Orbit },
+    { name: "Veloce Labs", tag: "Automation", icon: Cpu },
+    { name: "KiteGrowth", tag: "Marketing", icon: Compass },
   ];
 
   // Repeat for continuous smooth marquee loop
@@ -35,7 +50,7 @@ export default function TrustedBrandsSection() {
           <div className="inline-flex items-center gap-2 bg-slate-50 border border-slate-200/90 px-4 py-1.5 rounded-full text-xs font-bold text-slate-700 shadow-2xs">
             <Sparkles className="w-4 h-4 text-emerald-600" />
             <span className="tracking-wider uppercase text-[11px] sm:text-xs">
-              Trusted by 1,000+ Fast-Growing Companies
+              Trusted by 20+ Fast-Growing Companies
             </span>
           </div>
           
@@ -45,7 +60,7 @@ export default function TrustedBrandsSection() {
             <span className="inline-block bg-[#00a859] text-white px-3 sm:px-5 py-1 sm:py-1.5 rounded-xl sm:rounded-2xl shadow-sm mx-1 align-middle">
               Next-Gen Conversations
             </span>{" "}
-            for 1,000+ Global Brands
+            for 20+ Growing Brands
           </h2>
           
           {/* Spacious, High-Impact Paragraph */}
@@ -87,30 +102,35 @@ export default function TrustedBrandsSection() {
         <div className="absolute top-0 bottom-0 right-0 w-20 sm:w-36 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
         <motion.div
-          className="flex gap-5 sm:gap-7 items-center w-max"
+          className="flex gap-4 sm:gap-6 items-center w-max"
           animate={{ x: ["0%", "-33.333%"] }}
           transition={{
             repeat: Infinity,
-            duration: 25,
+            duration: 30,
             ease: "linear",
           }}
         >
-          {marqueeBrands.map((brand, index) => (
-            <div 
-              key={index}
-              className="bg-white border border-slate-200/80 hover:border-slate-300 w-48 sm:w-56 h-24 rounded-2xl flex items-center justify-center p-4 transition-all duration-300 shadow-2xs group flex-shrink-0"
-            >
-              <div className="relative w-32 sm:w-36 h-9 flex items-center justify-center opacity-70 group-hover:opacity-100 transition-opacity">
-                <Image 
-                  src={brand.logo} 
-                  alt={brand.name}
-                  fill
-                  sizes="(max-width: 640px) 128px, 144px"
-                  className="object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                />
+          {marqueeBrands.map((brand, index) => {
+            const Icon = brand.icon;
+            return (
+              <div 
+                key={index}
+                className="bg-white border border-slate-200/90 hover:border-[#00a859]/60 hover:shadow-lg hover:shadow-emerald-500/5 px-5 sm:px-6 py-3.5 h-16 sm:h-18 rounded-2xl flex items-center gap-3.5 transition-all duration-300 shadow-2xs group flex-shrink-0 cursor-default"
+              >
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 group-hover:bg-[#f0fdf4] border border-slate-200/70 group-hover:border-[#bbf7d0] flex items-center justify-center text-slate-600 group-hover:text-[#00a859] transition-all duration-300 shrink-0 shadow-2xs">
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:scale-110" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-black text-slate-800 group-hover:text-[#1d1d1d] text-sm sm:text-base tracking-tight transition-colors">
+                    {brand.name}
+                  </span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 group-hover:text-[#00a859] transition-colors">
+                    {brand.tag}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </motion.div>
       </div>
 

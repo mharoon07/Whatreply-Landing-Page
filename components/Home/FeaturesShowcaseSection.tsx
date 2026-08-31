@@ -244,7 +244,7 @@ export default function FeaturesShowcaseSection() {
                       <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/70 flex items-center justify-between shadow-2xs">
                         <div>
                           <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Active Deal Value</p>
-                          <p className="text-2xl font-black text-[#1d1d1d]">$4,850.00</p>
+                          <p className="text-2xl font-black text-[#1d1d1d]">PKR 4,850.00</p>
                         </div>
                         <span className="bg-purple-100 text-purple-700 text-xs font-extrabold px-3 py-1 rounded-full">Contract Sent</span>
                       </div>

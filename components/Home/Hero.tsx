@@ -222,9 +222,9 @@ export default function Hero() {
                 ))}
               </div>
               <span className="font-bold text-slate-900 ml-1">4.9/5</span>
-              <span className="text-xs text-slate-500">(2,400+ reviews)</span>
+              <span className="text-xs text-slate-500">(30+ reviews)</span>
             </div>
-            <span className="text-slate-500">Trusted by <strong className="text-slate-900 font-semibold">1000+ businesses</strong> in 100+ countries</span>
+            <span className="text-slate-500">Trusted by <strong className="text-slate-900 font-semibold">20+ businesses</strong> in 5+ countries</span>
           </div>
         </motion.div>
 
