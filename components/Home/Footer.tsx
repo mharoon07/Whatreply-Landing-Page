@@ -73,10 +73,10 @@ export default function Footer() {
                   placeholder="Enter your work email..." 
                   className="w-full bg-transparent px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none"
                 />
-                <button className="w-full sm:w-auto px-7 py-3.5 bg-[#00a859] hover:bg-[#00924d] text-white font-extrabold rounded-xl text-sm transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer active:scale-95">
+                <Link href="https://app.whatreply.tech/en/login" className="w-full sm:w-auto px-7 py-3.5 bg-[#00a859] hover:bg-[#00924d] text-white font-extrabold rounded-xl text-sm transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer active:scale-95">
                   <span>Let's Talk</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </Link>
               </div>
             </div>
 

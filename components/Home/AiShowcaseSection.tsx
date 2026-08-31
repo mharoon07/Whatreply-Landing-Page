@@ -140,7 +140,7 @@ export default function AiShowcaseSection() {
                 {/* CTA Button */}
                 <div className="pt-2">
                   <Link 
-                    href="/free-trial"
+                    href="https://app.whatreply.tech/en/login"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#1d1d1d] text-white px-8 py-4 rounded-full font-extrabold hover:bg-[#00e785] hover:text-[#1d1d1d] transition-all duration-300 shadow-lg shadow-black/10 group cursor-pointer"
                   >
                     <span>{content.cta}</span>

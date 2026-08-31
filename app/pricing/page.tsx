@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import Navbar from '@/components/Home/Navbar';
 
 export default function PricingPage() {
@@ -137,9 +138,9 @@ export default function PricingPage() {
               </ul>
             </div>
 
-            <button className="mt-8 w-full py-3 rounded-2xl bg-gray-100 hover:bg-[#00a859] hover:text-white text-gray-900 font-semibold transition-all duration-300 cursor-pointer shadow-2xs">
+            <Link href="https://app.whatreply.tech/en/login" className="mt-8 w-full block text-center py-3 rounded-2xl bg-gray-100 hover:bg-[#00a859] hover:text-white text-gray-900 font-semibold transition-all duration-300 cursor-pointer shadow-2xs">
               Start Free Trial
-            </button>
+            </Link>
           </div>
 
           {/* Center Card: High-End HDR Image + Floating Animation (Growth AI - Premium Black) */}
@@ -195,9 +196,9 @@ export default function PricingPage() {
               </ul>
             </div>
 
-            <button className="mt-8 w-full py-4 rounded-2xl bg-[#00e785] hover:bg-[#00c974] text-slate-950 font-black text-base transition-all duration-300 cursor-pointer shadow-lg shadow-[#00e785]/25 hover:shadow-[#00e785]/40 hover:-translate-y-0.5">
+            <Link href="https://app.whatreply.tech/en/login" className="mt-8 w-full block text-center py-4 rounded-2xl bg-[#00e785] hover:bg-[#00c974] text-slate-950 font-black text-base transition-all duration-300 cursor-pointer shadow-lg shadow-[#00e785]/25 hover:shadow-[#00e785]/40 hover:-translate-y-0.5">
               Start Free Trial
-            </button>
+            </Link>
           </div>
 
           {/* Right Card */}
@@ -235,9 +236,9 @@ export default function PricingPage() {
               </ul>
             </div>
 
-            <button className="mt-8 w-full py-3 rounded-2xl bg-gray-100 hover:bg-[#00a859] hover:text-white text-gray-900 font-semibold transition-all duration-300 cursor-pointer shadow-2xs">
+            <Link href="https://app.whatreply.tech/en/login" className="mt-8 w-full block text-center py-3 rounded-2xl bg-gray-100 hover:bg-[#00a859] hover:text-white text-gray-900 font-semibold transition-all duration-300 cursor-pointer shadow-2xs">
               Contact Sales
-            </button>
+            </Link>
           </div>
 
         </div>

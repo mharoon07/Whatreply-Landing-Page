@@ -114,7 +114,7 @@ export default function Hero() {
           className="inline-flex justify-center mb-4 sm:mb-5"
         >
           <Link
-            href="/free-trial"
+            href="https://app.whatreply.tech/en/login"
             className="group relative inline-flex items-center gap-2 sm:gap-3 bg-slate-50 hover:bg-white border border-slate-200/90 hover:border-emerald-400 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-800 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
           >
             <span className="flex h-2 w-2 relative">
@@ -152,7 +152,7 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 pt-2 sm:pt-3">
             {/* Primary CTA: Start Free Trial with 3D Dual-Layer Liquid Wave & Moving Border Line */}
             <Link 
-              href="/free-trial" 
+              href="https://app.whatreply.tech/en/login" 
               className="group relative w-full sm:w-auto p-[1.5px] rounded-full overflow-hidden transition-all duration-300 shadow-xl shadow-slate-900/10 hover:-translate-y-0.5 cursor-pointer"
             >
               {/* Slow Moving Green Light Beam Tracing the Border Line */}
@@ -177,7 +177,7 @@ export default function Hero() {
 
             {/* Secondary CTA: Watch Demo with 3D Dual-Layer Liquid Wave & Moving Border Line */}
             <Link 
-              href="/demo" 
+              href="https://app.whatreply.tech/en/login" 
               className="group relative w-full sm:w-auto p-[1.5px] rounded-full overflow-hidden transition-all duration-300 shadow-xs hover:shadow-md cursor-pointer"
             >
               {/* Slow Moving Green Light Beam Tracing the Border Line */}

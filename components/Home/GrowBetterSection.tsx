@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, CheckCircle2, Zap, ShieldCheck, TrendingUp } from "lucide-react";
 
@@ -97,7 +98,7 @@ export default function GrowBetterSection() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-col items-center justify-center gap-4"
         >
-          <button className="relative group overflow-hidden rounded-full p-[2px] cursor-pointer shadow-2xl active:scale-95 transition-transform duration-200 w-full sm:w-auto">
+          <Link href="https://app.whatreply.tech/en/login" className="relative group overflow-hidden rounded-full p-[2px] cursor-pointer shadow-2xl active:scale-95 transition-transform duration-200 w-full sm:w-auto">
             {/* Animated Gradient Border Layer */}
             <span className="absolute inset-0 bg-gradient-to-r from-[#00a859] via-emerald-400 to-[#166534] rounded-full animate-pulse" />
             
@@ -106,7 +107,7 @@ export default function GrowBetterSection() {
               <span>Start Scaling For Free</span>
               <ArrowRight className="w-5 h-5 text-[#00e785] group-hover:translate-x-1.5 transition-transform" />
             </span>
-          </button>
+          </Link>
 
           <span className="text-xs text-gray-500 font-medium">
             Join 1,000+ ambitious businesses automating their growth today.

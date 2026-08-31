@@ -9,17 +9,17 @@ const SOLUTIONS = [
   {
     name: "Wati for Marketing",
     desc: "Acquire and engage leads at scale",
-    href: "#marketing",
+    href: "https://app.whatreply.tech/en/login",
   },
   {
     name: "Wati for Support",
     desc: "AI-powered query resolution",
-    href: "#support",
+    href: "https://app.whatreply.tech/en/login",
   },
   {
     name: "Wati for Sales",
     desc: "Nurture leads and close deals",
-    href: "#sales",
+    href: "https://app.whatreply.tech/en/login",
   },
 ];
 
@@ -27,17 +27,17 @@ const PRODUCTS = [
   {
     name: "No-Code Chatbots",
     desc: "Human-like AI chatbots for every use case",
-    href: "#chatbots",
+    href: "https://app.whatreply.tech/en/login",
   },
   {
     name: "Team Inbox",
     desc: "All sales & service chats in one place",
-    href: "#inbox",
+    href: "https://app.whatreply.tech/en/login",
   },
   {
     name: "WhatsApp API",
     desc: "Connect with customers at scale",
-    href: "#whatsapp-api",
+    href: "https://app.whatreply.tech/en/login",
   },
 ];
 
@@ -146,13 +146,13 @@ export default function Navbar() {
         {/* Desktop Action Buttons */}
         <div className="hidden lg:flex items-center gap-4">
           <Link
-            href="/login"
+            href="https://app.whatreply.tech/en/login"
             className="text-[#1d1d1d] font-semibold hover:text-[#00e785] transition"
           >
             Log in
           </Link>
           <Link
-            href="/demo"
+            href="https://app.whatreply.tech/en/login"
             className="bg-[#1d1d1d] text-white px-6 py-3 rounded-full font-bold hover:bg-[#00e785] hover:text-[#1d1d1d] transition-all shadow-md flex items-center gap-2"
           >
             Book a Demo <ArrowRight className="w-4 h-4" />
@@ -173,14 +173,14 @@ export default function Navbar() {
       {isOpen && (
         <div className="lg:hidden absolute top-20 left-0 w-full bg-white border-b border-gray-200 shadow-2xl px-6 py-8 flex flex-col gap-6 animate-in slide-in-from-top duration-300">
           <Link
-            href="#solutions"
+            href="https://app.whatreply.tech/en/login"
             onClick={() => setIsOpen(false)}
             className="text-lg font-bold text-[#1d1d1d] hover:text-[#00e785]"
           >
             Solutions
           </Link>
           <Link
-            href="#product"
+            href="https://app.whatreply.tech/en/login"
             onClick={() => setIsOpen(false)}
             className="text-lg font-bold text-[#1d1d1d] hover:text-[#00e785]"
           >
@@ -205,14 +205,14 @@ export default function Navbar() {
 
           <div className="flex flex-col gap-3">
             <Link
-              href="/login"
+              href="https://app.whatreply.tech/en/login"
               onClick={() => setIsOpen(false)}
               className="text-center py-3 font-bold text-[#1d1d1d] border border-gray-200 rounded-full hover:bg-gray-50"
             >
               Log in
             </Link>
             <Link
-              href="/demo"
+              href="https://app.whatreply.tech/en/login"
               onClick={() => setIsOpen(false)}
               className="text-center py-3 font-bold text-[#1d1d1d] bg-[#00e785] rounded-full hover:bg-[#00d075] shadow-md"
             >
