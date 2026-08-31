@@ -116,23 +116,27 @@ export default function PricingPage() {
               
               <div className="mt-6 flex items-baseline">
                 <span className="text-4xl font-extrabold tracking-tight">
-                  {billingCycle === 'monthly' ? 'PKR 49' : 'PKR 39'}
+                  {billingCycle === 'monthly' ? 'PKR 10,000' : 'PKR 8,000'}
                 </span>
                 <span className="ml-1 text-gray-500 text-sm">/mo</span>
               </div>
 
               <ul className="mt-6 space-y-3.5 text-sm text-gray-600">
                 <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold">✓</span>
-                  1,000 Chats / month
+                  <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                  Smart AI Auto-Reply & Support
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold">✓</span>
-                  Basic Website Widget
+                  <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                  Custom Knowledge Base Training
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold">✓</span>
-                  Email Support
+                  <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                  Website Live Chat Widget
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                  Email & Ticket Support
                 </li>
               </ul>
             </div>
@@ -170,7 +174,7 @@ export default function PricingPage() {
               
               <div className="mt-6 flex items-baseline">
                 <span className="text-5xl font-black tracking-tight text-[#00e785]">
-                  {billingCycle === 'monthly' ? 'PKR 129' : 'PKR 99'}
+                  {billingCycle === 'monthly' ? 'PKR 15,000' : 'PKR 12,000'}
                 </span>
                 <span className="ml-1 text-slate-400 text-sm">/mo</span>
               </div>
@@ -178,15 +182,19 @@ export default function PricingPage() {
               <ul className="mt-6 space-y-3.5 text-sm text-slate-200 font-medium">
                 <li className="flex items-center gap-3">
                   <span className="w-5 h-5 rounded-full bg-[#00e785] text-slate-950 flex items-center justify-center text-xs font-black shrink-0">✓</span>
-                  Unlimited AI Chats
+                  WhatsApp Cloud API Integration
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="w-5 h-5 rounded-full bg-[#00e785] text-slate-950 flex items-center justify-center text-xs font-black shrink-0">✓</span>
-                  Custom Chatbot Persona
+                  Shared Team Inbox & Live Routing
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="w-5 h-5 rounded-full bg-[#00e785] text-slate-950 flex items-center justify-center text-xs font-black shrink-0">✓</span>
-                  CRM Integrations (Shopify/HubSpot)
+                  Custom Chatbot Persona & Tone
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="w-5 h-5 rounded-full bg-[#00e785] text-slate-950 flex items-center justify-center text-xs font-black shrink-0">✓</span>
+                  CRM & Shopify Sync 
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="w-5 h-5 rounded-full bg-[#00e785] text-slate-950 flex items-center justify-center text-xs font-black shrink-0">✓</span>
@@ -214,23 +222,27 @@ export default function PricingPage() {
               
               <div className="mt-6 flex items-baseline">
                 <span className="text-4xl font-extrabold tracking-tight">
-                  {billingCycle === 'monthly' ? 'PKR 299' : 'PKR 249'}
+                  {billingCycle === 'monthly' ? 'PKR 20,000' : 'PKR 16,000'}
                 </span>
                 <span className="ml-1 text-gray-500 text-sm">/mo</span>
               </div>
 
               <ul className="mt-6 space-y-3.5 text-sm text-gray-600">
                 <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold">✓</span>
+                  <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
                   Custom AI Model Training
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold">✓</span>
-                  Dedicated Support Agent
+                  <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                  Automated Bulk Broadcasts
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold">✓</span>
-                  Advanced Security & SLA
+                  <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                  Dedicated Support Account Manager
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                  Advanced Security, SLA & Webhooks
                 </li>
               </ul>
             </div>

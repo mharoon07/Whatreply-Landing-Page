@@ -67,7 +67,7 @@ export default function PrivacyPage() {
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</span>
-                <span><strong className="text-gray-900">Integration Data:</strong> Data synchronized through third-party connections such as Meta WhatsApp Cloud API, Shopify, HubSpot, Zendesk, or custom webhooks.</span>
+                <span><strong className="text-gray-900">Integration Data:</strong> Data synchronized through third-party connections such as Meta WhatsApp Cloud API, Shopify and custom webhooks.</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-5 h-5 rounded-full bg-emerald-50 text-[#00a859] flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</span>

@@ -14,7 +14,7 @@ const TAB_CONTENT = {
     features: [
       "Instant 0.8s response time on WhatsApp & Web",
       "Multilingual AI with human-like empathy & context",
-      "Direct 1-click sync with Zendesk, HubSpot & Shopify",
+      "Direct 1-click sync with WooCommerce, Zoho, n8n & Shopify",
     ],
     image: "/ai-support2.png",
     cta: "Build Your AI Agent",
@@ -47,18 +47,18 @@ export default function AiShowcaseSection() {
   const content = TAB_CONTENT[activeTab];
 
   return (
-    <section 
+    <section
       aria-label="AI Agents Showcase Section"
       className="py-14 sm:py-20 lg:py-16 bg-white relative overflow-hidden border-t border-slate-100"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        
+
         {/* Animated Tab Switcher with Scroll Fade/Slide */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ }}
+          transition={{}}
           className="flex justify-center mb-10 sm:mb-14"
         >
           <div className="bg-gray-100/90 backdrop-blur-md p-1.5 rounded-full inline-flex gap-2 border border-gray-200/80 shadow-inner">
@@ -66,12 +66,11 @@ export default function AiShowcaseSection() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`relative px-5 sm:px-8 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-extrabold transition-colors duration-300 cursor-pointer ${
-                  activeTab === tab ? "text-[#1d1d1d]" : "text-gray-500 hover:text-[#1d1d1d]"
-                }`}
+                className={`relative px-5 sm:px-8 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-extrabold transition-colors duration-300 cursor-pointer ${activeTab === tab ? "text-[#1d1d1d]" : "text-gray-500 hover:text-[#1d1d1d]"
+                  }`}
               >
                 {activeTab === tab && (
-                  <motion.div 
+                  <motion.div
                     layoutId="activeTabBadge"
                     className="absolute inset-0 bg-white rounded-full shadow-md border border-gray-200/60 -z-10"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
@@ -85,7 +84,7 @@ export default function AiShowcaseSection() {
 
         {/* Dynamic Alternating Showcase Grid */}
         <AnimatePresence mode="wait">
-          <motion.div 
+          <motion.div
             key={activeTab}
             initial={{ opacity: 0, y: 20, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -93,21 +92,20 @@ export default function AiShowcaseSection() {
             transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1.0] }}
             className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
           >
-            
+
             {/* Text Card Column */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: activeTab === "support" ? -30 : 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={springTransition}
-              className={`${
-                activeTab === "support" 
-                  ? "lg:col-span-5 lg:order-1" 
+              className={`${activeTab === "support"
+                  ? "lg:col-span-5 lg:order-1"
                   : "lg:col-span-5 lg:order-2"
-              }`}
+                }`}
             >
               <div className="bg-slate-50/90 border border-slate-200/80 rounded-3xl p-6 sm:p-8 lg:p-9 shadow-sm space-y-6">
-                
+
                 <div className="flex items-center justify-between">
                   <div className="w-12 h-12 rounded-2xl bg-[#f0fdf4] border border-[#bbf7d0] flex items-center justify-center text-[#00a859] shadow-2xs">
                     <Bot className="w-6 h-6" />
@@ -139,7 +137,7 @@ export default function AiShowcaseSection() {
 
                 {/* CTA Button */}
                 <div className="pt-2">
-                  <Link 
+                  <Link
                     href="https://app.whatreply.tech/en/login"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#1d1d1d] text-white px-8 py-4 rounded-full font-extrabold hover:bg-[#00e785] hover:text-[#1d1d1d] transition-all duration-300 shadow-lg shadow-black/10 group cursor-pointer"
                   >
@@ -152,19 +150,18 @@ export default function AiShowcaseSection() {
             </motion.div>
 
             {/* Responsive Image Showcase Column */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: activeTab === "support" ? 30 : -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={springTransition}
-              className={`${
-                activeTab === "support" 
-                  ? "lg:col-span-7 lg:order-2" 
+              className={`${activeTab === "support"
+                  ? "lg:col-span-7 lg:order-2"
                   : "lg:col-span-7 lg:order-1"
-              }`}
+                }`}
             >
               <div className="relative w-full aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200/80 shadow-xs">
-                <Image 
+                <Image
                   src={content.image}
                   alt={content.title}
                   fill
