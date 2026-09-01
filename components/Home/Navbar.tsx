@@ -3,21 +3,22 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 
 const SOLUTIONS = [
   {
-    name: "Replyly for Marketing",
+    name: "Whatreply for Marketing",
     desc: "Acquire and engage leads at scale",
     href: "https://app.whatreply.tech/en/login",
   },
   {
-    name: "Replyly for Support",
+    name: "Whatreply for Support",
     desc: "AI-powered query resolution",
     href: "https://app.whatreply.tech/en/login",
   },
   {
-    name: "Replyly for Sales",
+    name: "Whatreply for Sales",
     desc: "Nurture leads and close deals",
     href: "https://app.whatreply.tech/en/login",
   },
@@ -42,6 +43,7 @@ const PRODUCTS = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [productOpen, setProductOpen] = useState(false);
@@ -130,12 +132,22 @@ export default function Navbar() {
           </div>
 
           <Link
-          href="/pricing"
-            className="hover:text-[#00e785] transition-colors"
+            href="/pricing"
+            className={`transition-colors ${
+              pathname === "/pricing" ? "text-[#00a859] font-bold" : "hover:text-[#00e785]"
+            }`}
           >
             Pricing
           </Link>
-         
+
+          <Link
+            href="/blogs"
+            className={`transition-colors ${
+              pathname?.startsWith("/blogs") ? "text-[#00a859] font-bold" : "hover:text-[#00e785]"
+            }`}
+          >
+            Blogs
+          </Link>
         </nav>
 
         {/* Desktop Action Buttons */}
@@ -184,11 +196,21 @@ export default function Navbar() {
           <Link
             href="/pricing"
             onClick={() => setIsOpen(false)}
-            className="text-lg font-bold text-[#1d1d1d] hover:text-[#00e785]"
+            className={`text-lg font-bold ${
+              pathname === "/pricing" ? "text-[#00a859]" : "text-[#1d1d1d] hover:text-[#00e785]"
+            }`}
           >
             Pricing
           </Link>
-          
+          <Link
+            href="/blogs"
+            onClick={() => setIsOpen(false)}
+            className={`text-lg font-bold ${
+              pathname?.startsWith("/blogs") ? "text-[#00a859]" : "text-[#1d1d1d] hover:text-[#00e785]"
+            }`}
+          >
+            Blogs
+          </Link>
 
           <hr className="border-gray-100 my-2" />
 
