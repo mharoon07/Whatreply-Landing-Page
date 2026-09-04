@@ -5,7 +5,7 @@ import Link from "next/link";
 import Navbar from "@/components/Home/Navbar";
 import Footer from "@/components/Home/Footer";
 import BlogCard from "@/components/Blogs/BlogCard";
-import { fetchSingleBlog, fetchBlogsList, BlogPost } from "@/lib/blog-data";
+import { fetchSingleBlog, fetchBlogsList, BlogPost, DEFAULT_FALLBACK_IMAGE } from "@/lib/blog-data";
 import {
   ArrowLeft,
   Calendar,
@@ -115,8 +115,12 @@ export default function SingleBlogPage({ params }: PageProps) {
         <div className="flex items-center justify-between py-4 border-y border-gray-100 mb-8">
           <div className="flex items-center gap-3">
             <img
-              src="/robots.png"
+              src={blog.author?.avatar || "/robots.png"}
               alt="Whatreply Profile Avatar"
+              onError={(e) => {
+                const target = e.currentTarget;
+                target.src = "/robots.png";
+              }}
               className="w-10 h-10 rounded-full object-cover shrink-0"
             />
             <div className="flex flex-col gap-0.5">
@@ -130,8 +134,14 @@ export default function SingleBlogPage({ params }: PageProps) {
         {blog.coverImage && (
           <div className="relative w-full h-72 sm:h-[480px] lg:h-[540px] rounded-3xl overflow-hidden mb-12 shadow-lg bg-gray-100 border border-gray-200">
             <img
-              src={blog.coverImage}
+              src={blog.coverImage || DEFAULT_FALLBACK_IMAGE}
               alt={blog.title}
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (target.src !== DEFAULT_FALLBACK_IMAGE) {
+                  target.src = DEFAULT_FALLBACK_IMAGE;
+                }
+              }}
               className="w-full h-full object-cover"
             />
           </div>

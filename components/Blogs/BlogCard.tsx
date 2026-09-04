@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, Clock, Calendar } from "lucide-react";
-import { BlogPost } from "@/lib/blog-data";
+import { BlogPost, DEFAULT_FALLBACK_IMAGE } from "@/lib/blog-data";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -26,8 +26,15 @@ export default function BlogCard({ post }: BlogCardProps) {
         {/* Card Thumbnail Image */}
         <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-gray-100 cursor-pointer">
           <img
-            src={post.coverImage}
+            src={post.coverImage || DEFAULT_FALLBACK_IMAGE}
             alt={post.title}
+            onError={(e) => {
+              const target = e.currentTarget;
+              if (target.src !== DEFAULT_FALLBACK_IMAGE) {
+                target.src = DEFAULT_FALLBACK_IMAGE;
+              }
+            }}
+            loading="lazy"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute top-3 left-3 z-10">
@@ -49,8 +56,12 @@ export default function BlogCard({ post }: BlogCardProps) {
       <div className="p-5 pt-0 border-t border-gray-100 flex items-center justify-between mt-auto cursor-pointer">
         <div className="flex items-center gap-2.5">
           <img
-            src="/robots.png"
+            src={post.author?.avatar || "/robots.png"}
             alt="Whatreply AI Avatar"
+            onError={(e) => {
+              const target = e.currentTarget;
+              target.src = "/robots.png";
+            }}
             className="w-8 h-8 rounded-full object-cover shrink-0"
           />
           <div className="flex flex-col gap-0.5">
