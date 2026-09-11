@@ -146,7 +146,7 @@ export default function TermsPage() {
               <DollarSign className="w-5 h-5 text-[#00a859]" /> 4. Subscriptions, PKR Pricing & Meta Conversation Charges
             </h3>
             <p className="text-sm sm:text-base text-gray-600">
-              Whatreply offers tiered subscription plans (Starter Bot, Growth AI, Enterprise AI) designed to scale with your business volume:
+              Whatreply offers tiered subscription plans (Starter, Growth, Business) designed to scale with your business volume:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
               <div className="p-5 rounded-2xl bg-white border border-gray-200 shadow-2xs">
