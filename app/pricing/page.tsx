@@ -178,7 +178,7 @@ export default function PricingPage() {
         {/* Hero Header Section */}
         <section className="pt-32 pb-10 px-4 text-center max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-[#00a859] text-xs font-semibold tracking-wide uppercase shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5" /> 7-Day Free Trial • Free Setup Included
+            <Sparkles className="w-3.5 h-3.5" /> Instant Activation • Free Setup Included
           </div>
           
           <h1 className="text-3xl md:text-5xl font-black tracking-tight text-gray-900 leading-tight">
@@ -283,7 +283,7 @@ export default function PricingPage() {
                 href="https://app.whatreply.tech/en/login" 
                 className="mt-8 w-full block text-center py-3.5 rounded-2xl bg-gray-100 hover:bg-[#00a859] hover:text-white text-gray-900 font-bold transition-all duration-300 cursor-pointer shadow-2xs"
               >
-                Start Free Trial
+                Get Started
               </Link>
             </div>
 
@@ -366,7 +366,7 @@ export default function PricingPage() {
                 href="https://app.whatreply.tech/en/login" 
                 className="mt-8 w-full block text-center py-4 rounded-2xl bg-[#00e785] hover:bg-[#00c974] text-slate-950 font-black text-base transition-all duration-300 cursor-pointer shadow-lg shadow-[#00e785]/25 hover:shadow-[#00e785]/40 hover:-translate-y-0.5"
               >
-                Start Free Trial
+                Get Started
               </Link>
             </div>
 
@@ -436,7 +436,7 @@ export default function PricingPage() {
                 href="https://app.whatreply.tech/en/login" 
                 className="mt-8 w-full block text-center py-3.5 rounded-2xl bg-gray-900 hover:bg-[#00a859] text-white font-bold transition-all duration-300 cursor-pointer shadow-2xs"
               >
-                Start Free Trial
+                Get Started
               </Link>
             </div>
 
@@ -571,9 +571,9 @@ export default function PricingPage() {
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-bold text-gray-900 text-sm">7-Day Free Trial</h4>
+                <h4 className="font-bold text-gray-900 text-sm">Instant Activation</h4>
                 <p className="text-xs text-gray-500 mt-1 leading-relaxed">
-                  Test full platform features with complete peace of mind. No credit card required to start.
+                  Get your workspace operational in minutes with full access to official WhatsApp API features.
                 </p>
               </div>
             </div>

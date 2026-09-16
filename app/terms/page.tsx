@@ -162,9 +162,9 @@ export default function TermsPage() {
                 </p>
               </div>
               <div className="p-5 rounded-2xl bg-white border border-gray-200 shadow-2xs">
-                <h4 className="font-bold text-gray-900 text-sm mb-1">Free Trials</h4>
+                <h4 className="font-bold text-gray-900 text-sm mb-1">Subscription Activation</h4>
                 <p className="text-xs text-gray-500 leading-relaxed">
-                  Free trial periods provide full feature evaluation without requiring initial credit card verification. At the end of a trial, continued service requires selection of a paid subscription plan.
+                  Service begins upon successful subscription registration and onboarding. Platform access is provisioned immediately upon confirmation of the chosen plan.
                 </p>
               </div>
               <div className="p-5 rounded-2xl bg-white border border-gray-200 shadow-2xs">

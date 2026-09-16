@@ -146,7 +146,7 @@ export default function BlogsPage() {
                 href="https://app.whatreply.tech/en/login"
                 className="bg-[#00e785] text-gray-950 px-6 py-3 rounded-xl font-bold hover:bg-[#00d075] transition shadow-sm text-center flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer"
               >
-                Get Started Free <ArrowRight className="w-4 h-4" />
+                Get Started <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>

@@ -78,11 +78,11 @@ export default function GrowBetterSection() {
         >
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#00a859]" />
-            <span>No credit card required</span>
+            <span>Official WhatsApp Business API</span>
           </div>
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#00a859]" />
-            <span>7-day full access trial</span>
+            <span>Free setup & onboarding</span>
           </div>
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#00a859]" />
@@ -104,7 +104,7 @@ export default function GrowBetterSection() {
             
             {/* Button Inner Content */}
             <span className="relative px-8 sm:px-10 py-4 sm:py-4.5 bg-[#1d1d1d] rounded-full flex items-center justify-center gap-3 text-white font-extrabold text-base transition-all duration-300 group-hover:bg-opacity-90">
-              <span>Start Scaling For Free</span>
+              <span>Start Scaling Today</span>
               <ArrowRight className="w-5 h-5 text-[#00e785] group-hover:translate-x-1.5 transition-transform" />
             </span>
           </Link>
