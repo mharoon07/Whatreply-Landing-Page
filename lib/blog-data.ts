@@ -14,6 +14,7 @@ export interface BlogPost {
   publishedAt: string;
   readTime: string;
   tags?: string[];
+  views: number;
   originalData?: any;
 }
 
@@ -22,7 +23,8 @@ export const DEFAULT_FALLBACK_IMAGE =
 
 export const DEFAULT_AUTHOR_AVATAR = "/robots.png";
 
-export const TARGET_BLOG_API_URL = "http://app.whatreply.tech/api/blogs";
+export const TARGET_BLOG_API_URL =
+  process.env.NEXT_PUBLIC_BLOGS_API_URL || "https://app.whatreply.tech/api/blogs";
 
 export function getStoredApiUrl(): string {
   return TARGET_BLOG_API_URL;
@@ -357,6 +359,7 @@ export function normalizeBlogPost(raw: any, index: number, apiOrigin?: string): 
       author: { name: "Whatreply Team" },
       publishedAt: new Date().toISOString().split("T")[0],
       readTime: "3 min read",
+      views: 0,
     };
   }
 
@@ -467,6 +470,16 @@ export function normalizeBlogPost(raw: any, index: number, apiOrigin?: string): 
     tags = [category];
   }
 
+  // Extract Views
+  let views = 0;
+  if (typeof item.views === "number") views = item.views;
+  else if (typeof item.viewCount === "number") views = item.viewCount;
+  else if (typeof item.viewsCount === "number") views = item.viewsCount;
+  else if (typeof item.totalViews === "number") views = item.totalViews;
+  else if (typeof item.views_count === "number") views = item.views_count;
+  else if (item.views && !isNaN(Number(item.views))) views = Number(item.views);
+  else if (item.viewCount && !isNaN(Number(item.viewCount))) views = Number(item.viewCount);
+
   return {
     id,
     slug,
@@ -483,6 +496,7 @@ export function normalizeBlogPost(raw: any, index: number, apiOrigin?: string): 
     publishedAt,
     readTime,
     tags,
+    views,
     originalData: raw,
   };
 }
@@ -493,10 +507,11 @@ export async function fetchBlogsList(): Promise<{
   error?: string;
   rawResponse?: any;
 }> {
-  // URLs to try: relative '/api/blogs', 'http://localhost:3000/api/blogs', or env var
+  // Production URLs: app.whatreply.tech or environment variable
   const urlsToTry = [
-    "/api/blogs",
     TARGET_BLOG_API_URL,
+    "https://app.whatreply.tech/api/blogs",
+    "http://app.whatreply.tech/api/blogs",
     process.env.NEXT_PUBLIC_BLOGS_API_URL || "",
   ].filter(Boolean);
 
@@ -507,8 +522,6 @@ export async function fetchBlogsList(): Promise<{
       const res = await fetch(url, { cache: "no-store" });
       if (res.ok) {
         const json = await res.json();
-        console.log(`[Whatreply Blogs] Successfully fetched from ${url}:`, json);
-
         const apiOrigin = getOriginFromUrl(url);
         const rawList = extractBlogsArray(json);
         const blogs = rawList.map((item: any, idx: number) => normalizeBlogPost(item, idx, apiOrigin));
@@ -526,7 +539,7 @@ export async function fetchBlogsList(): Promise<{
     }
   }
 
-  // Server proxy fallback if direct fetch to localhost had CORS or origin mismatch
+  // Server proxy fallback if direct fetch had CORS or origin mismatch
   try {
     const proxyEndpoint = `/api/blogs-proxy?url=${encodeURIComponent(TARGET_BLOG_API_URL)}`;
     const proxyRes = await fetch(proxyEndpoint, { cache: "no-store" });
@@ -537,6 +550,7 @@ export async function fetchBlogsList(): Promise<{
         const apiOrigin = getOriginFromUrl(TARGET_BLOG_API_URL);
         const rawList = extractBlogsArray(proxyJson.data || proxyJson.raw);
         const blogs = rawList.map((item: any, idx: number) => normalizeBlogPost(item, idx, apiOrigin));
+
         return {
           blogs,
           apiUrl: TARGET_BLOG_API_URL,
@@ -557,9 +571,105 @@ export async function fetchBlogsList(): Promise<{
   };
 }
 
+/**
+ * Fetch a single blog post by slug or ID
+ */
 export async function fetchSingleBlog(idOrSlug: string): Promise<BlogPost | null> {
+  if (!idOrSlug) return null;
+
+  const endpointsToTry = [
+    `${TARGET_BLOG_API_URL}/${encodeURIComponent(idOrSlug)}`,
+    `https://app.whatreply.tech/api/blogs/${encodeURIComponent(idOrSlug)}`,
+    `http://app.whatreply.tech/api/blogs/${encodeURIComponent(idOrSlug)}`,
+  ];
+
+  for (const ep of endpointsToTry) {
+    try {
+      const res = await fetch(ep, { cache: "no-store" });
+      if (res.ok) {
+        const json = await res.json();
+        const singleData = json.data || json.blog || json.post || json;
+        if (singleData && (singleData.title || singleData.slug || singleData.id)) {
+          const apiOrigin = getOriginFromUrl(ep);
+          const blog = normalizeBlogPost(singleData, 0, apiOrigin);
+          return blog;
+        }
+      }
+    } catch {}
+  }
+
+  // Fallback to searching from all blogs
   const { blogs } = await fetchBlogsList();
   const match = blogs.find((b) => b.id === idOrSlug || b.slug === idOrSlug);
   if (match) return match;
   return blogs[0] || null;
 }
+
+/**
+ * Record a view for a blog article directly on https://app.whatreply.tech/api/blogs/{slug}/view
+ */
+export async function recordBlogView(slug: string): Promise<number | null> {
+  if (!slug) return null;
+
+  const endpoints = [
+    `${TARGET_BLOG_API_URL}/${encodeURIComponent(slug)}/view`,
+    `https://app.whatreply.tech/api/blogs/${encodeURIComponent(slug)}/view`,
+    `http://app.whatreply.tech/api/blogs/${encodeURIComponent(slug)}/view`,
+  ];
+
+  for (const ep of endpoints) {
+    try {
+      const res = await fetch(ep, {
+        method: "POST",
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        const views =
+          data.views ??
+          data.viewCount ??
+          data.viewsCount ??
+          data.data?.views ??
+          data.data?.viewCount;
+        if (typeof views === "number") {
+          return views;
+        }
+      }
+    } catch (err) {
+      console.error("[Blog View Error]:", err);
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Retrieve current real views count for a blog post from production domain
+ */
+export async function fetchBlogViews(slugOrId: string): Promise<number | null> {
+  if (!slugOrId) return null;
+  const encodedSlug = encodeURIComponent(slugOrId);
+
+  const urlsToTry = [
+    `${TARGET_BLOG_API_URL}/${encodedSlug}`,
+    `https://app.whatreply.tech/api/blogs/${encodedSlug}`,
+    `http://app.whatreply.tech/api/blogs/${encodedSlug}`,
+  ];
+
+  for (const u of urlsToTry) {
+    try {
+      const res = await fetch(u, { cache: "no-store" });
+      if (res.ok) {
+        const json = await res.json();
+        const item = json.data || json.blog || json.post || json;
+        const views = item?.views ?? item?.viewCount ?? item?.viewsCount;
+        if (typeof views === "number") return views;
+      }
+    } catch {}
+  }
+
+  return null;
+}
+
+
+

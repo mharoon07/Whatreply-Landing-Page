@@ -5,11 +5,18 @@ import Link from "next/link";
 import Navbar from "@/components/Home/Navbar";
 import Footer from "@/components/Home/Footer";
 import BlogCard from "@/components/Blogs/BlogCard";
-import { fetchSingleBlog, fetchBlogsList, BlogPost, DEFAULT_FALLBACK_IMAGE } from "@/lib/blog-data";
+import {
+  fetchSingleBlog,
+  fetchBlogsList,
+  recordBlogView,
+  BlogPost,
+  DEFAULT_FALLBACK_IMAGE,
+} from "@/lib/blog-data";
 import {
   ArrowLeft,
   Calendar,
   Clock,
+  Eye,
   Loader2,
   Sparkles,
 } from "lucide-react";
@@ -28,18 +35,37 @@ export default function SingleBlogPage({ params }: PageProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
+
     async function loadPostData() {
       setLoading(true);
       const post = await fetchSingleBlog(slugOrId);
+      if (!isMounted) return;
       setBlog(post);
+
+      // Record real view count via /api/blogs/[slug]/view or http://localhost:3000/api/blogs/[slug]/view
+      if (post) {
+        const targetSlug = post.slug || post.id || slugOrId;
+        recordBlogView(targetSlug).then((updatedViews) => {
+          if (isMounted && typeof updatedViews === "number" && updatedViews > 0) {
+            setBlog((prev) => (prev ? { ...prev, views: updatedViews } : null));
+          }
+        });
+      }
 
       // Load related blogs
       const { blogs } = await fetchBlogsList();
+      if (!isMounted) return;
       const filtered = blogs.filter((b) => b.id !== post?.id && b.slug !== post?.slug);
       setRelatedBlogs(filtered.slice(0, 3));
       setLoading(false);
     }
+
     loadPostData();
+
+    return () => {
+      isMounted = false;
+    };
   }, [slugOrId]);
 
   if (loading) {
@@ -75,6 +101,8 @@ export default function SingleBlogPage({ params }: PageProps) {
     );
   }
 
+  const viewsDisplay = typeof blog.views === "number" ? blog.views : 0;
+
   return (
     <div className="min-h-screen bg-white text-gray-900 selection:bg-[#00e785] selection:text-gray-900 flex flex-col font-plus-jakarta">
       {/* Global Header */}
@@ -103,6 +131,10 @@ export default function SingleBlogPage({ params }: PageProps) {
             <span className="flex items-center gap-1">
               <Clock className="w-3.5 h-3.5 text-gray-400" /> {blog.readTime}
             </span>
+            <span>•</span>
+            <span className="flex items-center gap-1.5 text-emerald-800 bg-emerald-50/80 px-2.5 py-0.5 rounded-full font-bold border border-emerald-200">
+              <Eye className="w-3.5 h-3.5 text-[#00a859]" /> {viewsDisplay.toLocaleString()} views
+            </span>
           </div>
         </div>
 
@@ -111,8 +143,8 @@ export default function SingleBlogPage({ params }: PageProps) {
           {blog.title}
         </h1>
 
-        {/* Author Details Bar */}
-        <div className="flex items-center justify-between py-4 border-y border-gray-100 mb-8">
+        {/* Author Details Bar with Live Views Badge */}
+        <div className="flex items-center justify-between py-4 border-y border-gray-100 mb-8 flex-wrap gap-4">
           <div className="flex items-center gap-3">
             <img
               src={blog.author?.avatar || "/robots.png"}
@@ -127,6 +159,13 @@ export default function SingleBlogPage({ params }: PageProps) {
               <h4 className="font-extrabold text-sm text-[#00a859]">Whatreply</h4>
               <p className="text-[11px] text-gray-400">{blog.publishedAt} • {blog.readTime}</p>
             </div>
+          </div>
+
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gray-50 border border-gray-200 shadow-xs">
+            <Eye className="w-4 h-4 text-[#00a859]" />
+            <span className="text-xs font-bold text-gray-800">
+              {viewsDisplay.toLocaleString()} <span className="font-normal text-gray-500">total views</span>
+            </span>
           </div>
         </div>
 

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, Clock, Calendar } from "lucide-react";
+import { ArrowRight, Clock, Calendar, Eye } from "lucide-react";
 import { BlogPost, DEFAULT_FALLBACK_IMAGE } from "@/lib/blog-data";
 
 interface BlogCardProps {
@@ -16,6 +16,8 @@ export default function BlogCard({ post }: BlogCardProps) {
   const authorName = post.author?.name?.toLowerCase().includes("admin")
     ? "Whatreply"
     : post.author?.name || "Whatreply";
+
+  const viewsCount = typeof post.views === "number" ? post.views : 0;
 
   return (
     <Link
@@ -37,9 +39,18 @@ export default function BlogCard({ post }: BlogCardProps) {
             loading="lazy"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
+          {/* Category Badge (Top-Left) */}
           <div className="absolute top-3 left-3 z-10">
             <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-gray-900 font-bold text-xs border border-gray-200/80 shadow-sm">
               {post.category}
+            </span>
+          </div>
+
+          {/* Views Pill (Top-Right) */}
+          <div className="absolute top-3 right-3 z-10">
+            <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white font-bold text-[11px] border border-white/20 shadow-sm flex items-center gap-1.5">
+              <Eye className="w-3 h-3 text-[#00e785]" />
+              {viewsCount.toLocaleString()}
             </span>
           </div>
         </div>
@@ -68,13 +79,17 @@ export default function BlogCard({ post }: BlogCardProps) {
             <span className="text-xs font-bold text-[#00a859]">
               {authorName}
             </span>
-            <div className="flex items-center gap-2 text-[11px] text-gray-400 font-medium">
+            <div className="flex items-center gap-2 text-[11px] text-gray-400 font-medium flex-wrap">
               <span className="flex items-center gap-1">
                 <Calendar className="w-3 h-3 text-gray-400" /> {post.publishedAt}
               </span>
               <span>•</span>
               <span className="flex items-center gap-1">
                 <Clock className="w-3 h-3 text-gray-400" /> {post.readTime}
+              </span>
+              <span>•</span>
+              <span className="flex items-center gap-1 text-gray-600 font-semibold">
+                <Eye className="w-3 h-3 text-[#00a859]" /> {viewsCount.toLocaleString()} views
               </span>
             </div>
           </div>
