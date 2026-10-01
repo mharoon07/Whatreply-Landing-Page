@@ -501,18 +501,36 @@ export function normalizeBlogPost(raw: any, index: number, apiOrigin?: string): 
   };
 }
 
+async function attachViewsToBlogs(blogs: BlogPost[]): Promise<BlogPost[]> {
+  try {
+    await Promise.all(
+      blogs.map(async (blog) => {
+        const targetSlug = blog.slug || blog.id;
+        if (targetSlug) {
+          const liveViews = await fetchBlogViews(targetSlug);
+          if (typeof liveViews === "number") {
+            blog.views = liveViews;
+          }
+        }
+      })
+    );
+  } catch {}
+  return blogs;
+}
+
 export async function fetchBlogsList(): Promise<{
   blogs: BlogPost[];
   apiUrl: string;
   error?: string;
   rawResponse?: any;
 }> {
-  // Production URLs: app.whatreply.tech or environment variable
   const urlsToTry = [
+    process.env.NEXT_PUBLIC_BLOGS_API_URL || "",
+    "http://localhost:3000/api/blogs",
+    "http://127.0.0.1:3000/api/blogs",
     TARGET_BLOG_API_URL,
     "https://app.whatreply.tech/api/blogs",
     "http://app.whatreply.tech/api/blogs",
-    process.env.NEXT_PUBLIC_BLOGS_API_URL || "",
   ].filter(Boolean);
 
   let lastError = "";
@@ -525,6 +543,7 @@ export async function fetchBlogsList(): Promise<{
         const apiOrigin = getOriginFromUrl(url);
         const rawList = extractBlogsArray(json);
         const blogs = rawList.map((item: any, idx: number) => normalizeBlogPost(item, idx, apiOrigin));
+        await attachViewsToBlogs(blogs);
 
         return {
           blogs,
@@ -541,19 +560,21 @@ export async function fetchBlogsList(): Promise<{
 
   // Server proxy fallback if direct fetch had CORS or origin mismatch
   try {
-    const proxyEndpoint = `/api/blogs-proxy?url=${encodeURIComponent(TARGET_BLOG_API_URL)}`;
+    const proxyTarget = TARGET_BLOG_API_URL || "http://localhost:3000/api/blogs";
+    const proxyEndpoint = `/api/blogs-proxy?url=${encodeURIComponent(proxyTarget)}`;
     const proxyRes = await fetch(proxyEndpoint, { cache: "no-store" });
 
     if (proxyRes.ok) {
       const proxyJson = await proxyRes.json();
       if (proxyJson.success) {
-        const apiOrigin = getOriginFromUrl(TARGET_BLOG_API_URL);
+        const apiOrigin = getOriginFromUrl(proxyTarget);
         const rawList = extractBlogsArray(proxyJson.data || proxyJson.raw);
         const blogs = rawList.map((item: any, idx: number) => normalizeBlogPost(item, idx, apiOrigin));
+        await attachViewsToBlogs(blogs);
 
         return {
           blogs,
-          apiUrl: TARGET_BLOG_API_URL,
+          apiUrl: proxyTarget,
           rawResponse: proxyJson.raw,
         };
       } else {
@@ -577,10 +598,13 @@ export async function fetchBlogsList(): Promise<{
 export async function fetchSingleBlog(idOrSlug: string): Promise<BlogPost | null> {
   if (!idOrSlug) return null;
 
+  const encodedSlug = encodeURIComponent(idOrSlug);
   const endpointsToTry = [
-    `${TARGET_BLOG_API_URL}/${encodeURIComponent(idOrSlug)}`,
-    `https://app.whatreply.tech/api/blogs/${encodeURIComponent(idOrSlug)}`,
-    `http://app.whatreply.tech/api/blogs/${encodeURIComponent(idOrSlug)}`,
+    `http://localhost:3000/api/blogs/${encodedSlug}`,
+    `http://127.0.0.1:3000/api/blogs/${encodedSlug}`,
+    `${TARGET_BLOG_API_URL.replace(/\/$/, "")}/${encodedSlug}`,
+    `https://app.whatreply.tech/api/blogs/${encodedSlug}`,
+    `http://app.whatreply.tech/api/blogs/${encodedSlug}`,
   ];
 
   for (const ep of endpointsToTry) {
@@ -592,6 +616,10 @@ export async function fetchSingleBlog(idOrSlug: string): Promise<BlogPost | null
         if (singleData && (singleData.title || singleData.slug || singleData.id)) {
           const apiOrigin = getOriginFromUrl(ep);
           const blog = normalizeBlogPost(singleData, 0, apiOrigin);
+          const liveViews = await fetchBlogViews(blog.slug || blog.id || idOrSlug);
+          if (typeof liveViews === "number") {
+            blog.views = liveViews;
+          }
           return blog;
         }
       }
@@ -601,27 +629,65 @@ export async function fetchSingleBlog(idOrSlug: string): Promise<BlogPost | null
   // Fallback to searching from all blogs
   const { blogs } = await fetchBlogsList();
   const match = blogs.find((b) => b.id === idOrSlug || b.slug === idOrSlug);
-  if (match) return match;
+  if (match) {
+    const liveViews = await fetchBlogViews(match.slug || match.id || idOrSlug);
+    if (typeof liveViews === "number") {
+      match.views = liveViews;
+    }
+    return match;
+  }
   return blogs[0] || null;
 }
 
+export function getOrCreateVisitorId(): string {
+  if (typeof window === "undefined") return "server-visitor";
+  try {
+    let vid = localStorage.getItem("whatreply_visitor_id");
+    if (!vid) {
+      vid = "v_" + Math.random().toString(36).substring(2, 11) + "_" + Date.now().toString(36);
+      localStorage.setItem("whatreply_visitor_id", vid);
+    }
+    return vid;
+  } catch {
+    return "anon_visitor";
+  }
+}
+
 /**
- * Record a view for a blog article directly on https://app.whatreply.tech/api/blogs/{slug}/view
+ * Record a view for a blog article via backend on localhost:3000, internal Next.js route, or remote backend
  */
-export async function recordBlogView(slug: string): Promise<number | null> {
+export async function recordBlogView(slug: string, visitorId?: string): Promise<number | null> {
   if (!slug) return null;
 
-  const endpoints = [
-    `${TARGET_BLOG_API_URL}/${encodeURIComponent(slug)}/view`,
-    `https://app.whatreply.tech/api/blogs/${encodeURIComponent(slug)}/view`,
-    `http://app.whatreply.tech/api/blogs/${encodeURIComponent(slug)}/view`,
-  ];
+  const vid = visitorId || getOrCreateVisitorId();
+  const encodedSlug = encodeURIComponent(slug);
+  const endpoints: string[] = [
+    `http://localhost:3000/api/blogs/${encodedSlug}/view`,
+    `http://127.0.0.1:3000/api/blogs/${encodedSlug}/view`,
+    typeof window !== "undefined" ? `/api/blogs/${encodedSlug}/view` : "",
+    TARGET_BLOG_API_URL ? `${TARGET_BLOG_API_URL.replace(/\/$/, "")}/${encodedSlug}/view` : "",
+    `https://app.whatreply.tech/api/blogs/${encodedSlug}/view`,
+  ].filter(Boolean);
+
+  let latestViews: number | null = null;
 
   for (const ep of endpoints) {
     try {
+      const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+      const timeoutId = controller ? setTimeout(() => controller.abort(), 2000) : null;
+
       const res = await fetch(ep, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "x-visitor-id": vid,
+        },
+        body: JSON.stringify({ visitorId: vid }),
+        ...(controller ? { signal: controller.signal } : {}),
       });
+
+      if (timeoutId) clearTimeout(timeoutId);
 
       if (res.ok) {
         const data = await res.json();
@@ -632,37 +698,56 @@ export async function recordBlogView(slug: string): Promise<number | null> {
           data.data?.views ??
           data.data?.viewCount;
         if (typeof views === "number") {
-          return views;
+          latestViews = views;
+          break;
         }
       }
-    } catch (err) {
-      console.error("[Blog View Error]:", err);
+    } catch {
+      // Gracefully try next endpoint
     }
   }
 
-  return null;
+  return latestViews;
 }
 
 /**
- * Retrieve current real views count for a blog post from production domain
+ * Retrieve current real views count for a blog post from localhost:3000, internal API, or remote backend
  */
 export async function fetchBlogViews(slugOrId: string): Promise<number | null> {
   if (!slugOrId) return null;
   const encodedSlug = encodeURIComponent(slugOrId);
 
-  const urlsToTry = [
-    `${TARGET_BLOG_API_URL}/${encodedSlug}`,
+  const urlsToTry: string[] = [
+    `http://localhost:3000/api/blogs/${encodedSlug}/view`,
+    `http://127.0.0.1:3000/api/blogs/${encodedSlug}/view`,
+    `http://localhost:3000/api/blogs/${encodedSlug}`,
+    typeof window !== "undefined" ? `/api/blogs/${encodedSlug}/view` : "",
+    TARGET_BLOG_API_URL ? `${TARGET_BLOG_API_URL.replace(/\/$/, "")}/${encodedSlug}/view` : "",
+    `https://app.whatreply.tech/api/blogs/${encodedSlug}/view`,
     `https://app.whatreply.tech/api/blogs/${encodedSlug}`,
-    `http://app.whatreply.tech/api/blogs/${encodedSlug}`,
-  ];
+  ].filter(Boolean);
 
   for (const u of urlsToTry) {
     try {
-      const res = await fetch(u, { cache: "no-store" });
+      const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+      const timeoutId = controller ? setTimeout(() => controller.abort(), 2000) : null;
+
+      const res = await fetch(u, {
+        cache: "no-store",
+        ...(controller ? { signal: controller.signal } : {}),
+      });
+
+      if (timeoutId) clearTimeout(timeoutId);
+
       if (res.ok) {
         const json = await res.json();
         const item = json.data || json.blog || json.post || json;
-        const views = item?.views ?? item?.viewCount ?? item?.viewsCount;
+        const views =
+          json?.views ??
+          item?.views ??
+          item?.viewCount ??
+          item?.viewsCount ??
+          item?.data?.views;
         if (typeof views === "number") return views;
       }
     } catch {}
@@ -670,6 +755,8 @@ export async function fetchBlogViews(slugOrId: string): Promise<number | null> {
 
   return null;
 }
+
+
 
 
 

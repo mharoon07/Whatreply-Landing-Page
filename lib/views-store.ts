@@ -6,8 +6,9 @@ import crypto from "crypto";
 const DATA_DIR = path.join(process.cwd(), "data");
 const VIEWS_FILE = path.join(DATA_DIR, "blog-views.json");
 
-// 24 hours cooldown for unique visitor counting (in milliseconds)
-export const VISITOR_COOLDOWN_MS = 24 * 60 * 60 * 1000;
+// Cooldown for unique visitor counting (short cooldown in dev for testing, 24h in production)
+export const VISITOR_COOLDOWN_MS =
+  process.env.NODE_ENV === "development" ? 2000 : 24 * 60 * 60 * 1000;
 
 interface ViewsStoreSchema {
   views: Record<string, number>;

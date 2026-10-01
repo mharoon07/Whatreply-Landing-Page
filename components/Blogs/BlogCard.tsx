@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight, Clock, Calendar, Eye } from "lucide-react";
-import { BlogPost, DEFAULT_FALLBACK_IMAGE } from "@/lib/blog-data";
+import { BlogPost, DEFAULT_FALLBACK_IMAGE, fetchBlogViews } from "@/lib/blog-data";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -11,13 +11,32 @@ interface BlogCardProps {
 
 export default function BlogCard({ post }: BlogCardProps) {
   const targetHref = `/blogs/${post.id || post.slug}`;
+  const [viewsCount, setViewsCount] = useState<number>(post.views || 0);
+
+  useEffect(() => {
+    if (typeof post.views === "number" && post.views > 0) {
+      setViewsCount(post.views);
+    }
+
+    let isMounted = true;
+    const targetSlug = post.slug || post.id;
+    if (targetSlug) {
+      fetchBlogViews(targetSlug).then((views) => {
+        if (isMounted && typeof views === "number" && views > 0) {
+          setViewsCount((prev) => Math.max(prev, views));
+        }
+      });
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [post.slug, post.id, post.views]);
 
   // Force author name to "Whatreply" if it says "Admin" or default
   const authorName = post.author?.name?.toLowerCase().includes("admin")
     ? "Whatreply"
     : post.author?.name || "Whatreply";
-
-  const viewsCount = typeof post.views === "number" ? post.views : 0;
 
   return (
     <Link

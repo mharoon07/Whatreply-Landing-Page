@@ -29,18 +29,32 @@ function getClientIp(headers: Headers): string {
 }
 
 /**
- * Forward view event to external backend only for new views
+ * Forward view event to external backend
  */
 async function forwardToBackend(
   slug: string,
   incomingHeaders: Headers,
   visitorId?: string
 ): Promise<{ views?: number } | null> {
-  const targetEndpoints = [
-    `http://localhost:3000/api/blogs/${encodeURIComponent(slug)}/view`,
-    `${TARGET_BLOG_API_URL}/${encodeURIComponent(slug)}/view`,
-    `http://app.whatreply.tech/api/blogs/${encodeURIComponent(slug)}/view`,
-  ];
+  const host = incomingHeaders.get("host") || "";
+  const targetEndpoints: string[] = [];
+
+  // If this request didn't originate internally from port 3000, forward to localhost:3000 backend
+  if (!host.includes(":3000") && host !== "localhost:3000") {
+    targetEndpoints.push(`http://localhost:3000/api/blogs/${encodeURIComponent(slug)}/view`);
+    targetEndpoints.push(`http://127.0.0.1:3000/api/blogs/${encodeURIComponent(slug)}/view`);
+  }
+
+  if (
+    TARGET_BLOG_API_URL &&
+    !TARGET_BLOG_API_URL.includes(host)
+  ) {
+    targetEndpoints.push(`${TARGET_BLOG_API_URL.replace(/\/$/, "")}/${encodeURIComponent(slug)}/view`);
+  }
+
+  if (!targetEndpoints.includes(`https://app.whatreply.tech/api/blogs/${encodeURIComponent(slug)}/view`)) {
+    targetEndpoints.push(`https://app.whatreply.tech/api/blogs/${encodeURIComponent(slug)}/view`);
+  }
 
   const clientIp = getClientIp(incomingHeaders);
   const headers: Record<string, string> = {
@@ -57,12 +71,18 @@ async function forwardToBackend(
 
   for (const endpoint of targetEndpoints) {
     try {
+      const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+      const timeoutId = controller ? setTimeout(() => controller.abort(), 2500) : null;
+
       const res = await fetch(endpoint, {
         method: "POST",
         headers,
         body: JSON.stringify({ visitorId, ip: clientIp }),
         cache: "no-store",
+        ...(controller ? { signal: controller.signal } : {}),
       });
+
+      if (timeoutId) clearTimeout(timeoutId);
 
       if (res.ok) {
         const json = await res.json();
@@ -78,7 +98,7 @@ async function forwardToBackend(
         }
       }
     } catch {
-      // Ignore fallback
+      // Silently ignore remote sync failures
     }
   }
   return null;
@@ -122,23 +142,19 @@ export async function POST(request: Request, context: RouteContext) {
   fpList.push(generateFingerprint(`ip_ua:${clientIp}:${userAgent}`));
   fpList.push(generateFingerprint(`ip_ua_lang:${clientIp}:${userAgent}:${acceptLanguage}`));
 
-  // 1. Check deduplication
+  // 1. Check deduplication & local increment
   const { isNewView, views: localViews } = recordUniqueView(decodedSlug, fpList);
 
   let finalViews = localViews;
 
-  // 2. Only forward to remote backend if this is genuinely a NEW unique view
-  if (isNewView) {
-    try {
-      const remoteResult = await forwardToBackend(decodedSlug, request.headers, clientVisitorId);
-      if (remoteResult && typeof remoteResult.views === "number") {
-        if (remoteResult.views > finalViews) {
-          finalViews = setViews(decodedSlug, remoteResult.views);
-        }
-      }
-    } catch (err) {
-      console.error("[View API] Error syncing remote backend:", err);
+  // 2. Forward to backend (e.g. localhost:3000 or production backend)
+  try {
+    const remoteResult = await forwardToBackend(decodedSlug, request.headers, clientVisitorId);
+    if (remoteResult && typeof remoteResult.views === "number") {
+      finalViews = setViews(decodedSlug, remoteResult.views);
     }
+  } catch {
+    // Remote sync is non-blocking and best-effort
   }
 
   return NextResponse.json({
@@ -165,7 +181,7 @@ export async function GET(request: Request, context: RouteContext) {
   }
 
   const decodedSlug = decodeURIComponent(slug);
-  const views = getViews(decodedSlug);
+  let views = getViews(decodedSlug);
 
   return NextResponse.json({
     success: true,
