@@ -58,7 +58,7 @@ export default function Navbar() {
           <div className="relative w-48 h-16 flex items-center">
             <Image
               src="/logo-navbar3.png"
-              alt="Replyly Logo"
+              alt="Whatreply Logo"
               fill
               sizes="192px"
               priority

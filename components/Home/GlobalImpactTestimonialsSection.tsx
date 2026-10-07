@@ -13,7 +13,7 @@ const stats = [
 
 const testimonials = [
   {
-    quote: "Replyly transformed how our sales team closes inbound leads. The shared inbox and automated broadcasts boosted our conversion rate by over 45% in just two months.",
+    quote: "Whatreply transformed how our sales team closes inbound leads. The shared inbox and automated broadcasts boosted our conversion rate by over 45% in just two months.",
     author: "Rohan Mehta",
     role: "Head of Growth",
     company: "Apex Retail Co.",
@@ -22,7 +22,7 @@ const testimonials = [
     rating: 5,
   },
   {
-    quote: "Setting up the official WhatsApp API used to be a nightmare. With Replyly, we went live in under 10 minutes. Our customer support response time dropped from hours to seconds.",
+    quote: "Setting up the official WhatsApp API used to be a nightmare. With Whatreply, we went live in under 10 minutes. Our customer support response time dropped from hours to seconds.",
     author: "Ayesha Siddiqui",
     role: "Customer Success Director",
     company: "UrbanEats Global",

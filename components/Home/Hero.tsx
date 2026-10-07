@@ -150,7 +150,7 @@ export default function Hero() {
 
           {/* Centered Action-Packed CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 pt-2 sm:pt-3">
-            {/* Primary CTA: Start Free Trial with 3D Dual-Layer Liquid Wave & Moving Border Line */}
+            {/* Primary CTA: Get Started with 3D Dual-Layer Liquid Wave & Moving Border Line */}
             <Link 
               href="https://app.whatreply.tech/en/login" 
               className="group relative w-full sm:w-auto p-[1.5px] rounded-full overflow-hidden transition-all duration-300 shadow-xl shadow-slate-900/10 hover:-translate-y-0.5 cursor-pointer"
@@ -170,7 +170,7 @@ export default function Hero() {
                 </span>
                 
                 <Zap className="w-5 h-5 text-[#00e785] group-hover:text-slate-950 transition-colors duration-500 relative z-10" />
-                <span className="relative z-10 group-hover:text-slate-950 transition-colors duration-500">Start Free 14-Day Trial</span>
+                <span className="relative z-10 group-hover:text-slate-950 transition-colors duration-500">Get Started Now</span>
                 <ArrowRight className="w-4 h-4 text-[#00e785] group-hover:text-slate-950 group-hover:translate-x-1 transition-all duration-500 relative z-10" />
               </span>
             </Link>
@@ -203,7 +203,7 @@ export default function Hero() {
           {/* Micro Trust Indicators */}
           <div className="pt-1.5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-slate-500 font-medium">
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#00a859]" /> No credit card needed
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#00a859]" /> Free Setup Included
             </span>
             <span className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#00a859]" /> Official WhatsApp Business API

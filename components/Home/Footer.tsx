@@ -32,7 +32,7 @@ export default function Footer() {
                   <div className="relative w-36 sm:w-66 h-20">
                     <Image
                       src="/logo-navbar3.png"
-                      alt="Replyly Logo"
+                      alt="Whatreply Logo"
                       fill
                       sizes="180px"
                       className="object-contain object-left"
@@ -41,7 +41,7 @@ export default function Footer() {
                   </div>
                 </div>
                 <p className="text-gray-400 text-base max-w-md leading-relaxed">
-                  Engineering high-performance web applications, scalable cloud backends, and modern digital experiences.
+                  AI-powered WhatsApp platform for automated customer engagement, multi-agent team inboxes, and intelligent sales chatbots.
                 </p>
               </div>
 
@@ -63,7 +63,7 @@ export default function Footer() {
             {/* Bottom Bar Section */}
             <div className="pt-12 pb-2 flex flex-col gap-6">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-gray-400">
-                <p>© {new Date().getFullYear()} Replyly. All rights reserved.</p>
+                <p>© {new Date().getFullYear()} Whatreply. All rights reserved.</p>
                 <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
                   <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
                   <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
